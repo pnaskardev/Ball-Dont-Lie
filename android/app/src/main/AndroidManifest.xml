@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.priyanshunaskar.balldontlie.ball_dont_lie">
    <application
-        android:label="ball_dont_lie"
+        android:label="Ball Don't Lie"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
