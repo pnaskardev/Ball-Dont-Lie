@@ -2,24 +2,27 @@
 
 class Team
 {
-  final int id;
-  final String abbreviation;
-  final String city;
-  final String conference;
-  final String division;
-  final String full_name;
+  final int position;
+  final String squadLogo;
   final String name;
-
+  final int points;
+  final int played;
+  final int winned;
+  final int loosed;
+  final int tie;
+  final int goalDifference;
   Team
   (
     {
-      required this.id,
-      required this.abbreviation,
-      required this.city,
-      required this.conference,
-      required this.division,
-      required this.full_name,
+      required this.position,
+      required this.squadLogo,
       required this.name,
+      required this.points,
+      required this.played,
+      required this.winned,
+      required this.loosed,
+      required this.tie,
+      required this.goalDifference
     }
   );
 
@@ -27,13 +30,15 @@ class Team
   {
     return Team
     (
-      id: eachTeam['id'], 
-      abbreviation: eachTeam['abbreviation'], 
-      city: eachTeam['city'], 
-      conference: eachTeam['conference'], 
-      division: eachTeam['division'], 
-      full_name: eachTeam['full_name'], 
-      name: eachTeam['name'],
+      position: eachTeam['Position'], 
+      squadLogo: eachTeam['SquadLogo'], 
+      name: eachTeam['Name'], 
+      points: eachTeam['Points'], 
+      played: eachTeam['Played'], 
+      winned: eachTeam['Winned'], 
+      loosed: eachTeam['Loosed'],
+      tie: eachTeam['Tie'],
+      goalDifference: eachTeam['Goal Difference']
     );
   }
 

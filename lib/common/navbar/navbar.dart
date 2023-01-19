@@ -1,5 +1,6 @@
 
 import 'package:animations/animations.dart';
+import 'package:ball_dont_lie/features/ChooseTeam/screens/choose_team.dart';
 import 'package:ball_dont_lie/features/Settings/screens/settings_page.dart';
 import 'package:ball_dont_lie/features/Standings/screens/standings_page.dart';
 import 'package:ball_dont_lie/features/home/screens/homepage.dart';
@@ -45,6 +46,7 @@ class _NavBarState extends State<NavBar>
           child: <Widget>
           [
             const HomePage(),
+            const ChooseTeam(),
             const Standings(),
             const SettingsPage(),
           ][currentPageIndex]
@@ -66,6 +68,11 @@ class _NavBarState extends State<NavBar>
             (
               icon: Icon(Icons.score_sharp),
               label: 'Scores',
+            ),
+            NavigationDestination
+            (
+              icon: Icon(Icons.telegram),
+              label: 'Choose Teams',
             ),
             NavigationDestination
             (

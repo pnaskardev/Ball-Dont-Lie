@@ -33,6 +33,11 @@ class MyApp extends StatelessWidget
         debugShowCheckedModeBanner: false,
         theme: ThemeData
         (
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme
+          (
+            centerTitle: true
+          ),
           primarySwatch: Colors.blue,
         ),
         home:  const NavBar()
