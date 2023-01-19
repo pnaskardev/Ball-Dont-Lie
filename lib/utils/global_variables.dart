@@ -30,10 +30,10 @@ final List<Tab> leagueTabs = <Tab>
 
 Map<int,Widget> MapIndexToWidget=
 {
-  0:const LaligaScreen(),
-  1:const PremierleagueScreen(),
-  2:const BundesligaScreen(),
-  3:const IslScreen()
+  0:const LaligaScreen(index: 0,),
+  1:const PremierleagueScreen(index: 1,),
+  2:const BundesligaScreen(index: 2,),
+  3:const IslScreen(index: 3,)
 };
 
 mapIndexToWidgetFun(int index)
@@ -54,4 +54,13 @@ Map<String,String> leagueHeaders =
   'fifaclubworldcup':"fifaclubworldcup",
   'indiansuperleague':"indiansuperleague",
   'majorleaguesoccer':"majorleaguesoccer",
+};
+
+
+Map<int,String> indexLeagueHeaders =
+{
+  0:"laliga",
+  1:"premierleague",
+  2:"bundesliga",
+  3:"indiansuperleague",
 };

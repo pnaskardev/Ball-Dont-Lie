@@ -46,7 +46,7 @@ class _NavBarState extends State<NavBar>
           child: <Widget>
           [
             const HomePage(),
-            const ChooseTeam(),
+            // const ChooseTeam(),
             const Standings(),
             const SettingsPage(),
           ][currentPageIndex]
@@ -69,11 +69,11 @@ class _NavBarState extends State<NavBar>
               icon: Icon(Icons.score_sharp),
               label: 'Scores',
             ),
-            NavigationDestination
-            (
-              icon: Icon(Icons.telegram),
-              label: 'Choose Teams',
-            ),
+            // NavigationDestination
+            // (
+            //   icon: Icon(Icons.telegram),
+            //   label: 'Choose Teams',
+            // ),
             NavigationDestination
             (
               icon: Icon(Icons.table_bar_outlined),

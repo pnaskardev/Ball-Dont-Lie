@@ -89,14 +89,10 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
                   TabBar
                   (
                     controller: _tabController,
-                    indicator: BoxDecoration
-                    (
-                      borderRadius: BorderRadius.circular(25),
-                      color: Colors.green
-                    ),
                     isScrollable: true,
-                    labelColor: Colors.black,
-                    tabs: leagueTabs
+                    // labelColor: Colors.black,
+                    tabs: leagueTabs,
+                    
                   ),
                   
                 ),
@@ -147,8 +143,9 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate
     @override
     Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) 
     {
-      return  Container
+      return  Material
       (
+        color: Colors.white,
         child: _tabBar,
       );
     }
