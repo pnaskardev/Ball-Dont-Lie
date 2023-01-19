@@ -1,111 +1,132 @@
-import 'package:ball_dont_lie/features/leagues/ISL/screens/isl_screen.dart';
-import 'package:ball_dont_lie/features/leagues/bundesliga/screens/bundesliga_screen.dart';
-import 'package:ball_dont_lie/features/leagues/laliga/screens/laliga_screen.dart';
-import 'package:ball_dont_lie/features/leagues/premierLeague/screens/premierleague_screen.dart';
+import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:flutter/material.dart';
 
-class Standings extends StatelessWidget 
+class Standings extends StatefulWidget 
 {
   const Standings({super.key});
+
+  @override
+  State<Standings> createState() => _StandingsState();
+}
+
+class _StandingsState extends State<Standings> with SingleTickerProviderStateMixin
+{
+  late TabController _tabController;
+  var _currentIndex=0;
+  @override
+  void initState() 
+  {
+    _tabController=TabController
+    (
+      length: leagueTabs.length,
+      vsync: this
+    );
+    _tabController.addListener(_tabSelect);
+    super.initState();
+    
+  }
+
+  void _tabSelect()
+  {
+    setState(() 
+    {
+      _currentIndex=_tabController.index;
+    });
+  }
+
+  @override
+  void dispose() 
+  {
+    super.dispose();
+    _tabController.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) 
   {
     return  SafeArea
     (
-      child: DefaultTabController
+      child: Scaffold
       (
-        length: 4,
-        child: Scaffold
+        body: NestedScrollView
         (
-          body: NestedScrollView
-          (
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled)
-            {
-              return <Widget>
-              [
-                SliverAppBar.medium
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled)
+          {
+            return <Widget>
+            [
+              SliverAppBar.medium
+              (
+                pinned: true,
+                floating: true,
+                backgroundColor: Colors.indigo,
+                flexibleSpace: const FlexibleSpaceBar
                 (
-                  pinned: true,
-                  floating: true,
-                  backgroundColor: Colors.indigo,
-                  flexibleSpace: const FlexibleSpaceBar
-                  (
-                    collapseMode: CollapseMode.pin,
-                    centerTitle: true,
-                    title:  Text('Standings'),
-                   
-                  ),
-                  // title: const Text('Teams'),
-                  leading: IconButton
+                  collapseMode: CollapseMode.pin,
+                  centerTitle: true,
+                  title:  Text('Standings'),
+                 
+                ),
+                // title: const Text('Teams'),
+                leading: IconButton
+                (
+                  onPressed: (){}, 
+                  icon: const Icon(Icons.menu)
+                ),
+                actions: 
+                [
+                  IconButton
                   (
                     onPressed: (){}, 
-                    icon: const Icon(Icons.menu)
-                  ),
-                  actions: 
-                  [
-                    IconButton
-                    (
-                      onPressed: (){}, 
-                      icon: const Icon(Icons.more_vert)
-                    )
-                  ],
-                ),
-                SliverPersistentHeader
-                (
-                  delegate: _SliverAppBarDelegate
-                  (
-                    const TabBar
-                    (
-                      isScrollable: true,
-                      labelColor: Colors.black,
-                      tabs: 
-                      [
-                        Tab
-                        (
-                          // icon: Icon(Icons.directions_car),
-                          child: Text('LaLiga')
-                        ),
-                        Tab
-                        (
-                          // icon: Icon(Icons.directions_transit),
-                          child: Text('Premier League'),
-                        ),
-                        Tab
-                        (
-                          // icon: Icon(Icons.directions_transit),
-                          child: Text('BundesLiga'),
-                        ),
-                        Tab
-                        (
-                          // icon: Icon(Icons.directions_bike),
-                          child: Text('ISL'),
-                        ),
-                      ]
-                    
-                    ),
-                    
-                  ),
-                  pinned: true,
-                ),
-      
-              ];
-            },
-            body: const Center
-            (
-              child: TabBarView
-              (
-                children: 
-                [
-                  LaligaScreen(),
-                  PremierleagueScreen(),
-                  BundesligaScreen(),
-                  IslScreen()
+                    icon: const Icon(Icons.more_vert)
+                  )
                 ],
               ),
+              SliverPersistentHeader
+              (
+                delegate: _SliverAppBarDelegate
+                (
+                  TabBar
+                  (
+                    controller: _tabController,
+                    indicator: BoxDecoration
+                    (
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.green
+                    ),
+                    isScrollable: true,
+                    labelColor: Colors.black,
+                    tabs: leagueTabs
+                  ),
+                  
+                ),
+                pinned: true,
+              ),
+      
+            ];
+          },
+          body:  Center
+          (
+            child: TabBarView
+            (
+              controller: _tabController,
+              // children: const 
+              // [
+              //   LaligaScreen(),
+              //   PremierleagueScreen(),
+              //   BundesligaScreen(),
+              //   IslScreen()
+              // ],
+              children: leagueTabs.map((Tab tab) 
+              {
+                return Center
+                (
+                  child: mapIndexToWidgetFun(_currentIndex),
+                );
+              }).toList(),
             ),
-          
           ),
+        
         ),
       )
     );
