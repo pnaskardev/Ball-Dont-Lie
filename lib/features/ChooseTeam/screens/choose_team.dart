@@ -42,6 +42,10 @@ class ChooseTeam extends StatelessWidget {
                 }
               );
             }
+            else if(snapshot.connectionState==ConnectionState.waiting)
+            {
+              return const Center(child: Text('API is not working properly'));
+            }
             else
             {
               return const Center

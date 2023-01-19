@@ -1,3 +1,7 @@
+import 'package:ball_dont_lie/features/leagues/ISL/screens/isl_screen.dart';
+import 'package:ball_dont_lie/features/leagues/bundesliga/screens/bundesliga_screen.dart';
+import 'package:ball_dont_lie/features/leagues/laliga/screens/laliga_screen.dart';
+import 'package:ball_dont_lie/features/leagues/premierLeague/screens/premierleague_screen.dart';
 import 'package:flutter/material.dart';
 
 class Standings extends StatelessWidget 
@@ -11,7 +15,7 @@ class Standings extends StatelessWidget
     (
       child: DefaultTabController
       (
-        length: 3,
+        length: 4,
         child: Scaffold
         (
           body: NestedScrollView
@@ -24,12 +28,12 @@ class Standings extends StatelessWidget
                 (
                   pinned: true,
                   floating: true,
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: Colors.indigo,
                   flexibleSpace: const FlexibleSpaceBar
                   (
                     collapseMode: CollapseMode.pin,
                     centerTitle: true,
-                    title:  Text('Teams'),
+                    title:  Text('Standings'),
                    
                   ),
                   // title: const Text('Teams'),
@@ -46,16 +50,6 @@ class Standings extends StatelessWidget
                       icon: const Icon(Icons.more_vert)
                     )
                   ],
-                  // bottom: const TabBar
-                  // (
-                  //   labelColor: Colors.black,
-                  //   tabs: 
-                  //   [
-                  //     Tab(icon: Icon(Icons.directions_car)),
-                  //     Tab(icon: Icon(Icons.directions_transit)),
-                  //     Tab(icon: Icon(Icons.directions_bike)),
-                  //   ]
-                  // ),
                 ),
                 SliverPersistentHeader
                 (
@@ -63,12 +57,30 @@ class Standings extends StatelessWidget
                   (
                     const TabBar
                     (
+                      isScrollable: true,
                       labelColor: Colors.black,
                       tabs: 
                       [
-                        Tab(icon: Icon(Icons.directions_car)),
-                        Tab(icon: Icon(Icons.directions_transit)),
-                        Tab(icon: Icon(Icons.directions_bike)),
+                        Tab
+                        (
+                          // icon: Icon(Icons.directions_car),
+                          child: Text('LaLiga')
+                        ),
+                        Tab
+                        (
+                          // icon: Icon(Icons.directions_transit),
+                          child: Text('Premier League'),
+                        ),
+                        Tab
+                        (
+                          // icon: Icon(Icons.directions_transit),
+                          child: Text('BundesLiga'),
+                        ),
+                        Tab
+                        (
+                          // icon: Icon(Icons.directions_bike),
+                          child: Text('ISL'),
+                        ),
                       ]
                     
                     ),
@@ -85,9 +97,10 @@ class Standings extends StatelessWidget
               (
                 children: 
                 [
-                  Icon(Icons.directions_car),
-                  Icon(Icons.directions_transit),
-                  Icon(Icons.directions_bike),
+                  LaligaScreen(),
+                  PremierleagueScreen(),
+                  BundesligaScreen(),
+                  IslScreen()
                 ],
               ),
             ),
