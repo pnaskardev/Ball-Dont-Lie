@@ -36,7 +36,7 @@ class ChooseTeam extends StatelessWidget {
                 {
                   return ListTile
                   (
-                    title: Text(teams[index].name),
+                    title: Text(teams[index].name!),
                     // subtitle: Text(teams[index].city),
                   );
                 }

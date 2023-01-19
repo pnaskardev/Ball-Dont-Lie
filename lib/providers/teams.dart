@@ -19,17 +19,20 @@ class Teams with ChangeNotifier
   Future getTeams() async
   {
     // var response = await http.get(Uri.https('balldontlie.io','/api/v1/teams'));
-    var response = await http.get(Uri.https('football98.p.rapidapi.com','/premierleague/table'),headers: Headers.requestHeaders);
+    // var response = await http.get(Uri.https('football98.p.rapidapi.com','/premierleague/table'),headers: Headers.requestHeaders);
+    var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/premierleague/table'),headers: Headers.requestHeaders);
     // print(response.body);
     var jsonData=jsonDecode((response.body));
-    print(jsonData);
-    for(var eachTeam in jsonData[''])
+    // print(jsonData);
+    // print('end of json');
+    for(var eachTeam in jsonData)
     {
       // print(eachTeam);
-      final team=Team.fromSnap(eachTeam);
+      final team=Team.fromJson(eachTeam);
       _items.add(team);
+      notifyListeners();
     }
-    print(_items.length);
+    
   }
 
 }

@@ -1,16 +1,16 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, unnecessary_this
 
 class Team
 {
-  final int position;
-  final String squadLogo;
-  final String name;
-  final int points;
-  final int played;
-  final int winned;
-  final int loosed;
-  final int tie;
-  final int goalDifference;
+  String? position;
+  String? squadLogo;
+  String? name;
+  String? points;
+  String? played;
+  String? winned;
+  String? loosed;
+  String? tie;
+  String? goalDifference;
   Team
   (
     {
@@ -26,20 +26,33 @@ class Team
     }
   );
 
-  static Team fromSnap(var eachTeam) 
+  Team.fromJson(Map<String, dynamic> json) 
   {
-    return Team
-    (
-      position: eachTeam['Position'], 
-      squadLogo: eachTeam['SquadLogo'], 
-      name: eachTeam['Name'], 
-      points: eachTeam['Points'], 
-      played: eachTeam['Played'], 
-      winned: eachTeam['Winned'], 
-      loosed: eachTeam['Loosed'],
-      tie: eachTeam['Tie'],
-      goalDifference: eachTeam['Goal Difference']
-    );
+    position = json['Position'];
+    squadLogo = json['SquadLogo'];
+    name = json['Name'];
+    points = json['Points'];
+    played = json['Played'];
+    winned = json['Winned'];
+    loosed = json['Loosed'];
+    tie = json['Tie'];
+    goalDifference = json['Goal Difference'];
+  }
+
+  Map<String, dynamic> toJson() 
+  {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['Position'] = this.position;
+    data['SquadLogo'] = this.squadLogo;
+    data['Name'] = this.name;
+    data['Points'] = this.points;
+    data['Played'] = this.played;
+    data['Winned'] = this.winned;
+    data['Loosed'] = this.loosed;
+    data['Tie'] = this.tie;
+    data['Goal Difference'] = this.goalDifference;
+    return data;
+  
   }
 
 }
