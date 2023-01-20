@@ -36,11 +36,15 @@ class ChooseTeam extends StatelessWidget {
                 {
                   return ListTile
                   (
-                    title: Text(teams[index].abbreviation),
-                    subtitle: Text(teams[index].city),
+                    title: Text(teams[index].name!),
+                    // subtitle: Text(teams[index].city),
                   );
                 }
               );
+            }
+            else if(snapshot.connectionState==ConnectionState.waiting)
+            {
+              return const Center(child: Text('API is not working properly'));
             }
             else
             {
