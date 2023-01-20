@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 class LaligaScreen extends StatefulWidget 
 {
-  final int index;
-  const LaligaScreen({super.key,required this.index});
+  // final int index;
+  const LaligaScreen({super.key,/*required this.index*/});
 
   @override
   State<LaligaScreen> createState() => _LaligaScreenState();

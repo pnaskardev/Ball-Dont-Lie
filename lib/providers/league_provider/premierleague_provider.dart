@@ -23,7 +23,7 @@ class PremierLeagueTeams with ChangeNotifier
     notifyListeners();
   }
 
-   Future<void> getLaligaTeams() async
+  Future<void> getPremierLeagueTeams() async
   {
     isLoading=true;
     notifyListeners();

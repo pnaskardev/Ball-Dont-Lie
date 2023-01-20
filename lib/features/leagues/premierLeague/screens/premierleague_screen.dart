@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 class PremierleagueScreen extends StatefulWidget 
 {
-  final int index;
-  const PremierleagueScreen({super.key,required this.index});
+  // final int index;
+  const PremierleagueScreen({super.key,/*required this.index*/});
 
   @override
   State<PremierleagueScreen> createState() => _PremierleagueScreenState();
@@ -26,7 +26,7 @@ class _PremierleagueScreenState extends State<PremierleagueScreen> with Automati
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
     {
-      Provider.of<PremierLeagueTeams>(context,listen: false).getLaligaTeams();
+      Provider.of<PremierLeagueTeams>(context,listen: false).getPremierLeagueTeams();
     });
   }
 
@@ -34,7 +34,6 @@ class _PremierleagueScreenState extends State<PremierleagueScreen> with Automati
   Widget build(BuildContext context) 
   {
     super.build(context);
-    List<Team> teams=Provider.of<PremierLeagueTeams>(context,listen: false).getTeams;
     return SafeArea
     (
       child: Scaffold

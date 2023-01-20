@@ -1,19 +1,16 @@
-import 'dart:convert';
 
-import 'package:ball_dont_lie/api/Headers.dart';
+import 'package:ball_dont_lie/features/leagues/ISL/services/fetch_isl_teams.dart';
 import 'package:ball_dont_lie/models/team.dart';
-import 'package:ball_dont_lie/utils/global_variables.dart';
-import 'package:http/http.dart' as http; 
 import 'package:flutter/cupertino.dart';
 
 class ISlTeams with ChangeNotifier
 {
-  final List<Team> _islTeams=[];
+  List<Team> _islTeams=[];
+  
+  bool isLoading=false;
 
-  get getTeams
-  {
-    return _islTeams;
-  }
+  final _service=ISLService();
+  List<Team> get getTeams=> _islTeams;
 
   get getItemsLength
   { 
@@ -26,19 +23,18 @@ class ISlTeams with ChangeNotifier
     notifyListeners();
   }
 
-  // Future getislTeams(int index) async
-  // {
-  //   var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/${indexLeagueHeaders[index]}/table'),headers: Headers.requestHeaders);
-  //   // print(response.body);
-  //   var jsonData=jsonDecode((response.body));
-  //   // print(jsonData);
-  //   for(var eachTeam in jsonData)
-  //   {
-  //     final team=Team.fromJson(eachTeam);
-  //     addislTeam(team);
-  //   }
+ 
+  Future<void> getIslTeams() async
+  {
+    isLoading=true;
+    notifyListeners();
+
+    final response= await _service.getislTeams();
     
-  // }
+    _islTeams=response;
+    isLoading=false;
+    notifyListeners();
+  }
 
 
 }

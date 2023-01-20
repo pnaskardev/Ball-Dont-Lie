@@ -6,72 +6,57 @@ import 'package:provider/provider.dart';
 
 class BundesligaScreen extends StatefulWidget 
 {
-  final int index;
-  const BundesligaScreen({super.key,required this.index});
+  // final int index;
+  const BundesligaScreen({super.key,/*required this.index*/});
 
   @override
   State<BundesligaScreen> createState() => _BundesligaScreenState();
 }
 
-class _BundesligaScreenState extends State<BundesligaScreen> 
+class _BundesligaScreenState extends State<BundesligaScreen> with AutomaticKeepAliveClientMixin<BundesligaScreen>
 {
-  Future<void>? _loadingTeams;
-
+  @override
+  bool get wantKeepAlive => true;
   @override
   void initState() 
   {
-    _loadingTeams=FetchBundesligaTeams().getbundesLigaTeams(widget.index);
     super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
+    {
+      Provider.of<BundesLigaTeams>(context,listen: false).getbundesLigaTeams();
+    });
   }
 
  @override
   Widget build(BuildContext context) 
   {
-    List<Team> teams=Provider.of<BundesLigaTeams>(context,listen: false).getTeams;
+    super.build(context);
     return SafeArea
     (
       child: Scaffold
       (
-        body: FutureBuilder
-        (
-          // future: fetchTeams(),
-          future: _loadingTeams,
-          builder: (context, snapshot) 
+        body: Consumer<BundesLigaTeams>(builder: (context, value, child) 
+        {
+          if(value.isLoading==true)
           {
-            if(snapshot.connectionState==ConnectionState.done)
-            {
-              return teams.isEmpty
-              ?
-              const Center
-              (
-                child: Text('List is empty'),
-              ) 
-              :ListView.builder
-              (
-                itemCount: teams.length,
-                itemBuilder:(context,index)
-                {
-                  return ListTile
-                  (
-                    title: Text(teams[index].name!),
-                  );
-                }
-              );
-            }
-            else if(snapshot.connectionState==ConnectionState.waiting)
-            {
-              
-              return const Center
-              (
-                child: CircularProgressIndicator(),
-              );
-            }
-            else
-            {
-              return const Center(child: Text('API is not working properly'));
-            }
+            return const Center
+            (
+              child: CircularProgressIndicator(),
+            );
           }
-        ),
+          final fetchedTeams=value.getTeams;
+          return ListView.builder
+          (
+            itemCount: fetchedTeams.length,
+            itemBuilder:(context,index)
+            {
+              return ListTile
+              (
+                title: Text(fetchedTeams[index].name!),
+              );
+            }
+          );
+        },),
       )
     );
   }

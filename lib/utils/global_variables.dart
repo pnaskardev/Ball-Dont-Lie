@@ -28,18 +28,18 @@ final List<Tab> leagueTabs = <Tab>
   ),
 ];
 
-Map<int,Widget> MapIndexToWidget=
-{
-  0:const LaligaScreen(index: 0,),
-  1:const PremierleagueScreen(index: 1,),
-  2:const BundesligaScreen(index: 2,),
-  3:const IslScreen(index: 3,)
-};
+// Map<int,Widget> MapIndexToWidget=
+// {
+//   0:const LaligaScreen(index: 0,),
+//   1:const PremierleagueScreen(index: 1,),
+//   2:const BundesligaScreen(index: 2,),
+//   3:const IslScreen(index: 3,)
+// };
 
-mapIndexToWidgetFun(int index)
-{
-  return MapIndexToWidget[index];
-}
+// mapIndexToWidgetFun(int index)
+// {
+//   return MapIndexToWidget[index];
+// }
 
 
 

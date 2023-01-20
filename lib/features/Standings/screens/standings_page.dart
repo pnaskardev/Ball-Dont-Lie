@@ -1,3 +1,7 @@
+import 'package:ball_dont_lie/features/leagues/ISL/screens/isl_screen.dart';
+import 'package:ball_dont_lie/features/leagues/bundesliga/screens/bundesliga_screen.dart';
+import 'package:ball_dont_lie/features/leagues/laliga/screens/laliga_screen.dart';
+import 'package:ball_dont_lie/features/leagues/premierLeague/screens/premierleague_screen.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:flutter/material.dart';
 
@@ -14,36 +18,6 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
   @override
   bool get wantKeepAlive => true;
 
-  late TabController _tabController;
-  var _currentIndex=0;
-  @override
-  void initState() 
-  {
-    _tabController=TabController
-    (
-      length: leagueTabs.length,
-      vsync: this
-    );
-    _tabController.addListener(_tabSelect);
-    super.initState();
-    
-  }
-
-  void _tabSelect()
-  {
-    setState(() 
-    {
-      _currentIndex=_tabController.index;
-    });
-  }
-
-  @override
-  void dispose() 
-  {
-    super.dispose();
-    _tabController.dispose();
-  }
-
 
   @override
   Widget build(BuildContext context) 
@@ -53,73 +27,102 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
     (
       child: Scaffold
       (
-        body: NestedScrollView
+        body: DefaultTabController
         (
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled)
-          {
-            return <Widget>
-            [
-              SliverAppBar.medium
-              (
-                pinned: true,
-                floating: true,
-                backgroundColor: Colors.indigo,
-                flexibleSpace: const FlexibleSpaceBar
+          length: leagueTabs.length,
+          child: NestedScrollView
+          (
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled)
+            {
+              return <Widget>
+              [
+                SliverAppBar.medium
                 (
-                  collapseMode: CollapseMode.pin,
-                  centerTitle: true,
-                  title:  Text('Standings'),
-                 
-                ),
-                // title: const Text('Teams'),
-                leading: IconButton
-                (
-                  onPressed: (){}, 
-                  icon: const Icon(Icons.menu)
-                ),
-                actions: 
-                [
-                  IconButton
+                  pinned: true,
+                  floating: true,
+                  backgroundColor: Colors.indigo,
+                  flexibleSpace: const FlexibleSpaceBar
+                  (
+                    collapseMode: CollapseMode.pin,
+                    centerTitle: true,
+                    title:  Text('Standings'),
+                   
+                  ),
+                  // title: const Text('Teams'),
+                  leading: IconButton
                   (
                     onPressed: (){}, 
-                    icon: const Icon(Icons.more_vert)
-                  )
-                ],
-              ),
-              SliverPersistentHeader
-              (
-                delegate: _SliverAppBarDelegate
+                    icon: const Icon(Icons.menu)
+                  ),
+                  actions: 
+                  [
+                    IconButton
+                    (
+                      onPressed: (){}, 
+                      icon: const Icon(Icons.more_vert)
+                    )
+                  ],
+                ),
+                SliverPersistentHeader
                 (
-                  TabBar
+                  delegate: _SliverAppBarDelegate
                   (
-                    controller: _tabController,
-                    isScrollable: true,
-                    // labelColor: Colors.black,
-                    tabs: leagueTabs,
+                    TabBar
+                    (
+                      isScrollable: true,
+                      // labelColor: Colors.black,
+                      tabs: leagueTabs,
+                      
+                    ),
                     
                   ),
-                  
+                  pinned: true,
                 ),
-                pinned: true,
-              ),
-      
-            ];
-          },
-          body:  Center
-          (
-            child: TabBarView
+              
+              ];
+            },
+            body:  const Center
             (
-              controller: _tabController,
-              children: leagueTabs.map((Tab tab) 
-              {
-                return Center
-                (
-                  child: mapIndexToWidgetFun(_currentIndex),
-                );
-              }).toList(),
+              child: TabBarView
+              (
+                // children: leagueTabs.map((Tab tab) 
+                // {
+                //   return Center
+                //   (
+                //     child: mapIndexToWidgetFun(DefaultTabController.of(context)!.index),
+                //   );
+                // }).toList(),
+                children: 
+                [
+                   Tab
+                  (
+                    // icon: Icon(Icons.directions_car),
+                    // child: Text('LaLiga')
+                    child: LaligaScreen(),
+                  ),
+                   Tab
+                  (
+                    // icon: Icon(Icons.directions_transit),
+                    // child: Text('Premier League'),
+                    child: PremierleagueScreen(),
+                  ),
+                   Tab
+                  (
+                    // icon: Icon(Icons.directions_transit),
+                    // child: Text('BundesLiga'),
+                    child: BundesligaScreen(),
+                  ),
+                   Tab
+                  (
+                    // icon: Icon(Icons.directions_bike),
+                    // child: Text('ISL'),
+                    child: IslScreen(),
+                  ),
+                ],
+              ),
             ),
+          
           ),
-        
         ),
       )
     );
