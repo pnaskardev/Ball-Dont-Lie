@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:ball_dont_lie/api/Headers.dart';
 import 'package:ball_dont_lie/models/team.dart';
-import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
-import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:http/http.dart' as http; 
 class ISLService
 {

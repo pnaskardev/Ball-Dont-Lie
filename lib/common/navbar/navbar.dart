@@ -1,6 +1,5 @@
 
 import 'package:animations/animations.dart';
-import 'package:ball_dont_lie/features/ChooseTeam/screens/choose_team.dart';
 import 'package:ball_dont_lie/features/Settings/screens/settings_page.dart';
 import 'package:ball_dont_lie/features/Standings/screens/standings_page.dart';
 import 'package:ball_dont_lie/features/home/screens/homepage.dart';

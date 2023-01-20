@@ -41,7 +41,7 @@ class Team
 
   Map<String, dynamic> toJson() 
   {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['Position'] = this.position;
     data['SquadLogo'] = this.squadLogo;
     data['Name'] = this.name;

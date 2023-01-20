@@ -1,5 +1,3 @@
-import 'package:ball_dont_lie/features/leagues/bundesliga/services/fetch_bundesliga_teams.dart';
-import 'package:ball_dont_lie/models/team.dart';
 import 'package:ball_dont_lie/providers/league_provider/bundesliga_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

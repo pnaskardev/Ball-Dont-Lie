@@ -1,7 +1,3 @@
-import 'package:ball_dont_lie/features/leagues/ISL/screens/isl_screen.dart';
-import 'package:ball_dont_lie/features/leagues/bundesliga/screens/bundesliga_screen.dart';
-import 'package:ball_dont_lie/features/leagues/laliga/screens/laliga_screen.dart';
-import 'package:ball_dont_lie/features/leagues/premierLeague/screens/premierleague_screen.dart';
 import 'package:flutter/material.dart';
 
 final List<Tab> leagueTabs = <Tab>

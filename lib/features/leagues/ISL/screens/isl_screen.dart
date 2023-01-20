@@ -1,5 +1,3 @@
-import 'package:ball_dont_lie/features/leagues/ISL/services/fetch_isl_teams.dart';
-import 'package:ball_dont_lie/models/team.dart';
 import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
