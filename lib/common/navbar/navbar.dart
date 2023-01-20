@@ -15,8 +15,8 @@ class NavBar extends StatefulWidget
 
 class _NavBarState extends State<NavBar> 
 {
-  @override
   int currentPageIndex = 0;
+  @override
   Widget build(BuildContext context) 
   {
     

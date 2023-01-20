@@ -1,19 +1,17 @@
-import 'dart:convert';
 
-import 'package:ball_dont_lie/api/Headers.dart';
+import 'package:ball_dont_lie/features/leagues/laliga/services/fetch_laliga_teams.dart';
 import 'package:ball_dont_lie/models/team.dart';
-import 'package:ball_dont_lie/utils/global_variables.dart';
-import 'package:http/http.dart' as http; 
 import 'package:flutter/cupertino.dart';
 
 class LaligaTeams with ChangeNotifier
 {
-  final List<Team> _laligaTeams=[];
+  // Instance of the service class
+  final LaligaService _service = LaligaService();
+  bool isLoading=false;
+  List<Team> _laligaTeams=[];
 
-  get getlaligaTeams
-  {
-    return _laligaTeams;
-  }
+  // Getter 
+  List<Team> get getTeams=> _laligaTeams;
 
   get getItemsLength
   { 
@@ -22,23 +20,24 @@ class LaligaTeams with ChangeNotifier
 
   void addlaligaTeam(Team team)
   {
+    
     _laligaTeams.add(team);
     notifyListeners();
   }
 
-  Future getLaligaTeams(int index) async
+
+  Future<void> getLaligaTeams() async
   {
-    var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/${indexLeagueHeaders[index]}/table'),headers: Headers.requestHeaders);
-    // print(response.body);
-    var jsonData=jsonDecode((response.body));
-    // print(jsonData);
-    for(var eachTeam in jsonData)
-    {
-      final team=Team.fromJson(eachTeam);
-      addlaligaTeam(team);
-    }
+    isLoading=true;
+    notifyListeners();
+
+    final response= await _service.getLaligaTeams();
     
+    _laligaTeams=response;
+    isLoading=false;
+    notifyListeners();
   }
+
 
 
 }

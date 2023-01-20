@@ -1,64 +1,66 @@
-import 'package:ball_dont_lie/models/team.dart';
 import 'package:ball_dont_lie/providers/league_provider/laliga_provider.dart';
-import 'package:ball_dont_lie/utils/table_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LaligaScreen extends StatelessWidget 
+class LaligaScreen extends StatefulWidget 
 {
   final int index;
   const LaligaScreen({super.key,required this.index});
 
   @override
+  State<LaligaScreen> createState() => _LaligaScreenState();
+}
+
+class _LaligaScreenState extends State<LaligaScreen> with AutomaticKeepAliveClientMixin<LaligaScreen>
+{
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() 
+  {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
+    {
+      Provider.of<LaligaTeams>(context,listen: false).getLaligaTeams();
+    });
+    
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    List<Team> teams=Provider.of<LaligaTeams>(context,listen: false).getlaligaTeams;
+    super.build(context);
     return  SafeArea
     (
       child: Scaffold
       (
-        // body: Center(child:  Text('Laliga')),
-        body: FutureBuilder
-        (
-          // future: fetchTeams(),
-          future: Provider.of<LaligaTeams>(context,listen: false).getLaligaTeams(index),
-          builder: (context, snapshot) 
+        body: Consumer<LaligaTeams>(builder: (context, value, child) 
+        {
+          if(value.isLoading==true)
           {
-            if(snapshot.connectionState==ConnectionState.done)
-            {
-              return teams.isEmpty
-              ?
-              const Center
-              (
-                child: Text('List is empty'),
-              ) 
-              :ListView.builder
-              (
-                itemCount: teams.length,
-                itemBuilder:(context,index)
-                {
-                  return ListTile
-                  (
-                    title: Text(teams[index].name!),
-                  );
-                }
-              );
-            }
-            else if(snapshot.connectionState==ConnectionState.waiting)
-            {
-              
-              return const Center
-              (
-                child: CircularProgressIndicator(),
-              );
-            }
-            else
-            {
-              return const Center(child: Text('API is not working properly'));
-            }
+            return const Center
+            (
+              child: CircularProgressIndicator(),
+            );
           }
-        ),
+          final fetchedTeams=value.getTeams;
+          return ListView.builder
+          (
+            itemCount: fetchedTeams.length,
+            itemBuilder:(context,index)
+            {
+              return ListTile
+              (
+                title: Text(fetchedTeams[index].name!),
+              );
+            }
+          );
+        },),
       )
     );
   }
+  
+ 
 }

@@ -26,19 +26,19 @@ class BundesLigaTeams with ChangeNotifier
     notifyListeners();
   }
 
-  Future getbundesLigaTeams(int index) async
-  {
-    var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/${indexLeagueHeaders[index]}/table'),headers: Headers.requestHeaders);
-    // print(response.body);
-    var jsonData=jsonDecode((response.body));
-    // print(jsonData);
-    for(var eachTeam in jsonData)
-    {
-      final team=Team.fromJson(eachTeam);
-      addbundesLigaTeam(team);
-    }
+  // Future getbundesLigaTeams(int index) async
+  // {
+  //   var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/${indexLeagueHeaders[index]}/table'),headers: Headers.requestHeaders);
+  //   // print(response.body);
+  //   var jsonData=jsonDecode((response.body));
+  //   // print(jsonData);
+  //   for(var eachTeam in jsonData)
+  //   {
+  //     final team=Team.fromJson(eachTeam);
+  //     addbundesLigaTeam(team);
+  //   }
     
-  }
+  // }
 
 
 }

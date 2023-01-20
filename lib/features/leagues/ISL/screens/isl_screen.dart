@@ -1,14 +1,27 @@
+import 'package:ball_dont_lie/features/leagues/ISL/services/fetch_isl_teams.dart';
 import 'package:ball_dont_lie/models/team.dart';
 import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
-import 'package:ball_dont_lie/utils/table_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class IslScreen extends StatelessWidget 
+class IslScreen extends StatefulWidget 
 {
   final int index;
   const IslScreen({super.key,required this.index});
 
+  @override
+  State<IslScreen> createState() => _IslScreenState();
+}
+
+class _IslScreenState extends State<IslScreen> 
+{
+  Future<void>? _loadingTeams;
+  @override
+  void initState() 
+  {
+    _loadingTeams = FetchISLTeams().getislTeams(widget.index);  
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) 
   {
@@ -20,7 +33,7 @@ class IslScreen extends StatelessWidget
         body:FutureBuilder
         (
           // future: fetchTeams(),
-          future: Provider.of<ISlTeams>(context,listen: false).getislTeams(index),
+          future: _loadingTeams,
           builder: (context, snapshot) 
           {
             if(snapshot.connectionState==ConnectionState.done)

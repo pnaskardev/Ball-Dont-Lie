@@ -9,8 +9,11 @@ class Standings extends StatefulWidget
   State<Standings> createState() => _StandingsState();
 }
 
-class _StandingsState extends State<Standings> with SingleTickerProviderStateMixin
+class _StandingsState extends State<Standings> with SingleTickerProviderStateMixin , AutomaticKeepAliveClientMixin<Standings>
 {
+  @override
+  bool get wantKeepAlive => true;
+
   late TabController _tabController;
   var _currentIndex=0;
   @override
@@ -45,6 +48,7 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) 
   {
+    super.build(context);
     return  SafeArea
     (
       child: Scaffold
@@ -106,13 +110,6 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
             child: TabBarView
             (
               controller: _tabController,
-              // children: const 
-              // [
-              //   LaligaScreen(),
-              //   PremierleagueScreen(),
-              //   BundesligaScreen(),
-              //   IslScreen()
-              // ],
               children: leagueTabs.map((Tab tab) 
               {
                 return Center

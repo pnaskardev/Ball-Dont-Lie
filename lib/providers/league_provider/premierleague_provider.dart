@@ -1,19 +1,16 @@
-import 'dart:convert';
 
-import 'package:ball_dont_lie/api/Headers.dart';
+import 'package:ball_dont_lie/features/leagues/premierLeague/services/fetch_pl_teams.dart';
 import 'package:ball_dont_lie/models/team.dart';
-import 'package:ball_dont_lie/utils/global_variables.dart';
-import 'package:http/http.dart' as http; 
 import 'package:flutter/cupertino.dart';
 
 class PremierLeagueTeams with ChangeNotifier
 {
-  final List<Team> _plTeams=[];
+  List<Team> _plTeams=[];
+  bool isLoading=false;
 
-  get getteams
-  {
-    return _plTeams;
-  }
+  final _service=PLService();
+
+  List<Team> get getTeams=>_plTeams;
 
   get getPLteamsLength
   { 
@@ -26,19 +23,16 @@ class PremierLeagueTeams with ChangeNotifier
     notifyListeners();
   }
 
-  Future getPLteams(int index) async
+   Future<void> getLaligaTeams() async
   {
-    var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/${indexLeagueHeaders[index]}/table'),headers: Headers.requestHeaders);
-    // print(response.body);
-    var jsonData=jsonDecode((response.body));
-    // print(jsonData);
-    for(var eachTeam in jsonData)
-    {
-      final team=Team.fromJson(eachTeam);
-      addPlteam(team);
-    }
-    
-  }
+    isLoading=true;
+    notifyListeners();
 
+    final response= await _service.getPLteams();
+    
+    _plTeams=response;
+    isLoading=false;
+    notifyListeners();
+  }
 
 }
