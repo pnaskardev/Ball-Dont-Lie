@@ -1,9 +1,11 @@
 
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
+import 'package:ball_dont_lie/models/results.dart';
 import 'package:ball_dont_lie/providers/league_provider/bundesliga_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/laliga_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/premierleague_provider.dart';
+import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:ball_dont_lie/providers/teams.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget
         ChangeNotifierProvider<PremierLeagueTeams>(create: (context)=>PremierLeagueTeams()),
         ChangeNotifierProvider<BundesLigaTeams>(create: (context)=>BundesLigaTeams()),
         ChangeNotifierProvider<ISlTeams>(create: (context)=>ISlTeams()),
+        ChangeNotifierProvider<ResultsProvider>(create: (context)=>ResultsProvider()),
       ],
       child: MaterialApp
       (

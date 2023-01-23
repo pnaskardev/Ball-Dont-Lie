@@ -1,3 +1,4 @@
+import 'package:ball_dont_lie/features/Results/screens/result_screen.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +84,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                 [
                   Tab
                   (
-                    child: Text('Results')
+                    // child: Text('Results')
+                    child: ResultScreen(),
+                  ),
+                  Tab
+                  (
+                    child: Text('Today')
                   ),
                   Tab
                   (

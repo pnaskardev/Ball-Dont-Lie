@@ -33,6 +33,10 @@ final List<Tab> resultTabs=
   ),
   const Tab
   (
+    child: Text('Today'),
+  ),
+  const Tab
+  (
     child: Text('Fixtures'),
   )
 ];
