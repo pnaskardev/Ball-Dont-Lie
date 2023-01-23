@@ -17,8 +17,7 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
 {
   @override
   bool get wantKeepAlive => true;
-
-
+  
   @override
   Widget build(BuildContext context) 
   {

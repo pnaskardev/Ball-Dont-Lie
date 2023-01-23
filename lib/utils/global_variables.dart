@@ -24,6 +24,19 @@ final List<Tab> leagueTabs = <Tab>
   ),
 ];
 
+
+final List<Tab> resultTabs=
+[
+  const Tab
+  (
+    child: Text('Results'),
+  ),
+  const Tab
+  (
+    child: Text('Fixtures'),
+  )
+];
+
 // Map<int,Widget> MapIndexToWidget=
 // {
 //   0:const LaligaScreen(index: 0,),
