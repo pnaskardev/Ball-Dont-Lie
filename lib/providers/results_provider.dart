@@ -16,9 +16,9 @@ class ResultsProvider with ChangeNotifier
     notifyListeners();
     
     final response=await _service.getResults();
-
-    // _results=response;
-
+    _results=response;
+    isLoading=false;
+    notifyListeners();
   }
 
 }

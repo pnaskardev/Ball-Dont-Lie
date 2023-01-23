@@ -1,3 +1,4 @@
+import 'package:ball_dont_lie/features/Results/widgets/card.dart';
 import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,21 @@ class _ResultScreenState extends State<ResultScreen> with AutomaticKeepAliveClie
               child: CircularProgressIndicator(),
             );
           }
-          return const Text('results are laoded');
+          final fetchedResults=value.getResultsList;
+          return Text('faf');
+          // return ListView.builder
+          // (
+          //   itemCount: fetchedResults.length,
+          //   itemBuilder:(context,index)
+          //   {
+          //     // return ResultCard
+          //     // (
+          //     //   // title: Text(fetchedTeams[index].name!),
+          //     //   fetchedResults: fetch,
+          //     // );
+          //     return Text(fetchedResults[index].day!);
+          //   }
+          // );
         },),
       )
     );

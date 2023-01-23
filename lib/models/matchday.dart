@@ -1,4 +1,5 @@
-class Matchday {
+class Matchday 
+{
   String? homeLogo;
   String? homeTeam;
   String? awayLogo;
@@ -14,7 +15,8 @@ class Matchday {
       this.homeTeamScore,
       this.awayTeamScore});
 
-  Matchday.fromJson(Map<String, dynamic> json) {
+  Matchday.fromJson(Map<String, dynamic> json) 
+  {
     homeLogo = json['homeLogo'];
     homeTeam = json['homeTeam'];
     awayLogo = json['awayLogo'];
@@ -24,13 +26,13 @@ class Matchday {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['homeLogo'] = this.homeLogo;
-    data['homeTeam'] = this.homeTeam;
-    data['awayLogo'] = this.awayLogo;
-    data['awayTeam'] = this.awayTeam;
-    data['homeTeamScore'] = this.homeTeamScore;
-    data['awayTeamScore'] = this.awayTeamScore;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['homeLogo'] = homeLogo;
+    data['homeTeam'] = homeTeam;
+    data['awayLogo'] = awayLogo;
+    data['awayTeam'] = awayTeam;
+    data['homeTeamScore'] = homeTeamScore;
+    data['awayTeamScore'] = awayTeamScore;
     return data;
   }
 }
