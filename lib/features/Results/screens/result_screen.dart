@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ball_dont_lie/features/Results/widgets/card.dart';
 import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +45,9 @@ class _ResultScreenState extends State<ResultScreen> with AutomaticKeepAliveClie
             );
           }
           final fetchedResults=value.getResultsList;
-          return Text('faf');
+          log(fetchedResults.length.toString());
+          // return Text('faf');
+          return ResultCard(fetchedResults: fetchedResults);
           // return ListView.builder
           // (
           //   itemCount: fetchedResults.length,

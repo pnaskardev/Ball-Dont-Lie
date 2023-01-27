@@ -1,5 +1,6 @@
 
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
+import 'package:ball_dont_lie/features/MatchDayResults/screens/match_day_result_screen.dart';
 import 'package:ball_dont_lie/models/results.dart';
 import 'package:ball_dont_lie/providers/league_provider/bundesliga_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
@@ -60,7 +61,11 @@ class MyApp extends StatelessWidget
           ),
           primarySwatch: Colors.blue,
         ),
-        home:  const NavBar()
+        home:  const NavBar(),
+        routes: 
+        {
+          MatchDayResults.routeName:(context) => const MatchDayResults()
+        },
       ),
     );
   }
