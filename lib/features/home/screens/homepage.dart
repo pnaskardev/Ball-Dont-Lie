@@ -36,8 +36,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                 SliverAppBar.medium
                 (
                   pinned: true,
-                  floating: true,
-                  backgroundColor: Colors.indigo,
+                  floating: false,
+                  backgroundColor: Colors.white30,
                   flexibleSpace: const FlexibleSpaceBar
                   (
                     collapseMode: CollapseMode.pin,
@@ -62,6 +62,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                 ),
                 SliverPersistentHeader
                 (
+                  pinned: true,
                   delegate: _SliverAppBarDelegate
                   (
                     TabBar
@@ -123,7 +124,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate
       return  Material
       (
         
-        color: Colors.white,
+        color: Colors.white30,
         child: _tabBar,
       );
     }

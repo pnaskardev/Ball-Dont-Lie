@@ -33,18 +33,29 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
           (
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled)
             {
+              
               return <Widget>
               [
                 SliverAppBar.medium
                 (
+                  
                   pinned: true,
                   floating: true,
-                  backgroundColor: Colors.indigo,
+                  snap: true,
+                  forceElevated: innerBoxIsScrolled,
+                  backgroundColor: Colors.white30,
                   flexibleSpace: const FlexibleSpaceBar
                   (
                     collapseMode: CollapseMode.pin,
                     centerTitle: true,
-                    title:  Text('Standings'),
+                    title:  Text
+                    (
+                      'Standings',
+                      style:TextStyle
+                      (
+                        color: Colors.black
+                      ),
+                    ),
                    
                   ),
                   // title: const Text('Teams'),
@@ -69,7 +80,7 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
                     TabBar
                     (
                       isScrollable: true,
-                      // labelColor: Colors.black,
+                      labelColor: Colors.black,
                       tabs: leagueTabs,
                       
                     ),
@@ -84,13 +95,6 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
             (
               child: TabBarView
               (
-                // children: leagueTabs.map((Tab tab) 
-                // {
-                //   return Center
-                //   (
-                //     child: mapIndexToWidgetFun(DefaultTabController.of(context)!.index),
-                //   );
-                // }).toList(),
                 children: 
                 [
                    Tab
@@ -144,7 +148,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate
     {
       return  Material
       (
-        color: Colors.white,
+        color: Colors.white30,
         child: _tabBar,
       );
     }

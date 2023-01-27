@@ -32,7 +32,11 @@ class ResultCard extends StatelessWidget
           (
             onTap: ()
             {
-              Navigator.of(context).pushNamed(MatchDayResults.routeName);
+              Navigator.of(context).pushNamed
+              (
+                MatchDayResults.routeName,
+                arguments: fetchedResults[index].match
+              );
             },
             child: SizedBox
             (
