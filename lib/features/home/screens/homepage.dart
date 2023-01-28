@@ -1,4 +1,5 @@
 import 'package:ball_dont_lie/features/Results/screens/result_screen.dart';
+import 'package:ball_dont_lie/features/Today/screens/today_screen.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:flutter/material.dart';
 
@@ -97,7 +98,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                   ),
                   Tab
                   (
-                    child: Text('Today')
+                    // child: Text('Today')
+                    child: TodayScreen(),
                   ),
                   Tab
                   (

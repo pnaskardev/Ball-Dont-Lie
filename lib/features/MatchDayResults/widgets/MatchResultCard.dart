@@ -1,6 +1,7 @@
 import 'package:ball_dont_lie/models/matchday.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:neopop/neopop.dart';
 
 class MatchResultCard extends StatelessWidget 
 {
@@ -9,8 +10,9 @@ class MatchResultCard extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return Card
+    return NeoPopCard
     (
+      color: Colors.blueAccent,
       child: Row
       (
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
