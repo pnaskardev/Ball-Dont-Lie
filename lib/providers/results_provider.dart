@@ -6,19 +6,32 @@ class ResultsProvider with ChangeNotifier
 {
   final ResultService _service=ResultService();
   bool isLoading=false;
+  bool isError=false;
   List<Results> _results=[];
-
   List<Results> get getResultsList=>_results;
 
   Future<void> getResults()async
   {
-    isLoading=true;
-    notifyListeners();
     
-    final response=await _service.getResults();
-    _results=response;
-    isLoading=false;
-    notifyListeners();
+
+    try 
+    {
+      isLoading=true;
+      notifyListeners();
+      
+      final response=await _service.getResults();
+      _results=response;
+      isLoading=false;
+      notifyListeners();
+    } catch (e) 
+    {
+      isLoading=false;
+      notifyListeners();
+
+      isError=true;
+      notifyListeners();
+    }
+
   }
 
 }

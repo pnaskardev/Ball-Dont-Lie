@@ -42,7 +42,14 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                   (
                     collapseMode: CollapseMode.pin,
                     centerTitle: true,
-                    title:  Text('Home'),
+                    title:  Text
+                    (
+                      'Home',
+                      style: TextStyle
+                      (
+                        color: Colors.black
+                      ),
+                    ),
                    
                   ),
                   // title: const Text('Teams'),

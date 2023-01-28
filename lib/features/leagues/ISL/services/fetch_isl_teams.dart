@@ -7,16 +7,22 @@ class ISLService
 {
   Future<List<Team>> getislTeams() async
   {
-    var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'indiansuperleague/table'),headers: Headers.requestHeaders);
-    // print(response.body);
-    var jsonData=jsonDecode((response.body));
-    // print(jsonData);
-    List<Team> _tempItem=[];
-    for(var eachTeam in jsonData)
+    try 
     {
-      final team=Team.fromJson(eachTeam);
-      _tempItem.add(team);
-    } 
-    return _tempItem;
+      var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'indiansuperleague/table'),headers: Headers.requestHeaders);
+      // print(response.body);
+      var jsonData=jsonDecode((response.body));
+      // print(jsonData);
+      List<Team> _tempItem=[];
+      for(var eachTeam in jsonData)
+      {
+        final team=Team.fromJson(eachTeam);
+        _tempItem.add(team);
+      } 
+      return _tempItem;  
+    } catch (e) 
+    {
+      throw Exception(e);  
+    }
   }
 }

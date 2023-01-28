@@ -43,6 +43,10 @@ class _PremierleagueScreenState extends State<PremierleagueScreen> with Automati
               child: CircularProgressIndicator(),
             );
           }
+          else if(value.isError)
+          {
+            return const Center(child: Icon(Icons.error));
+          }
           final fetchedTeams=value.getTeams;
           return ListView.builder
           (

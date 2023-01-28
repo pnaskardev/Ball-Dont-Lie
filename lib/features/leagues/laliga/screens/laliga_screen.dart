@@ -45,6 +45,10 @@ class _LaligaScreenState extends State<LaligaScreen> with AutomaticKeepAliveClie
               child: CircularProgressIndicator(),
             );
           }
+          else if(value.isError)
+          {
+            return  const Center(child: Icon(Icons.error));
+          }
           final fetchedTeams=value.getTeams;
           return ListView.builder
           (

@@ -44,23 +44,18 @@ class _ResultScreenState extends State<ResultScreen> with AutomaticKeepAliveClie
               child: CircularProgressIndicator(),
             );
           }
+          else if(value.isError==true)
+          {
+            return const Center
+            (
+              child: Icon(Icons.error),
+              // child: SizedBox(),
+            );
+          }
           final fetchedResults=value.getResultsList;
           log(fetchedResults.length.toString());
           // return Text('faf');
           return ResultCard(fetchedResults: fetchedResults);
-          // return ListView.builder
-          // (
-          //   itemCount: fetchedResults.length,
-          //   itemBuilder:(context,index)
-          //   {
-          //     // return ResultCard
-          //     // (
-          //     //   // title: Text(fetchedTeams[index].name!),
-          //     //   fetchedResults: fetch,
-          //     // );
-          //     return Text(fetchedResults[index].day!);
-          //   }
-          // );
         },),
       )
     );

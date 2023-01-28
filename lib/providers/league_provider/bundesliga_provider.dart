@@ -7,7 +7,7 @@ class BundesLigaTeams with ChangeNotifier
 {
   List<Team> _bundesLigaTeams=[];
   bool isLoading=false;
-
+  bool isError=false;
   final _service=BundesligaService();
   get getTeams
   {
@@ -27,14 +27,24 @@ class BundesLigaTeams with ChangeNotifier
 
   Future<void> getbundesLigaTeams() async
   {
-    isLoading=true;
-    notifyListeners();
+    try 
+    {
+      isLoading=true;
+      notifyListeners();
 
-    final response= await _service.getbundesLigaTeams();
-    
-    _bundesLigaTeams=response;
-    isLoading=false;
-    notifyListeners();
+      final response= await _service.getbundesLigaTeams();
+      
+      _bundesLigaTeams=response;
+      isLoading=false;
+      notifyListeners();  
+    } catch (e) 
+    {
+        isLoading=false;
+        notifyListeners();
+
+        isError=true;
+        notifyListeners();
+    }
   }
 
 

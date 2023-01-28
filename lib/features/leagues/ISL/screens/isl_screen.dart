@@ -81,6 +81,10 @@ class _IslScreenState extends State<IslScreen>  with AutomaticKeepAliveClientMix
               child: CircularProgressIndicator(),
             );
           }
+          else if(value.isError==true)
+          {
+            return const Center(child: Icon(Icons.error));
+          }
           final fetchedTeams=value.getTeams;
           return ListView.builder
           (
