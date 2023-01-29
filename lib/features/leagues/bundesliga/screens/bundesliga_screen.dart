@@ -42,6 +42,13 @@ class _BundesligaScreenState extends State<BundesligaScreen> with AutomaticKeepA
               child: CircularProgressIndicator(),
             );
           }
+          else if(value.isError==true)
+          {
+            return const Center
+            (
+              child: Icon(Icons.error)
+            );
+          }
           final fetchedTeams=value.getTeams;
           return ListView.builder
           (

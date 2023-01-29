@@ -8,6 +8,7 @@ class LaligaTeams with ChangeNotifier
   // Instance of the service class
   final LaligaService _service = LaligaService();
   bool isLoading=false;
+  bool isError=false;
   List<Team> _laligaTeams=[];
 
   // Getter 
@@ -28,14 +29,27 @@ class LaligaTeams with ChangeNotifier
 
   Future<void> getLaligaTeams() async
   {
-    isLoading=true;
-    notifyListeners();
-
-    final response= await _service.getLaligaTeams();
     
-    _laligaTeams=response;
-    isLoading=false;
-    notifyListeners();
+
+    try 
+    {
+      isLoading=true;
+      notifyListeners();
+
+      final response= await _service.getLaligaTeams();
+      
+      _laligaTeams=response;
+      isLoading=false;
+      notifyListeners();
+    } catch (e) 
+    {
+      isLoading=false;
+      notifyListeners();
+
+      isError=true;
+      notifyListeners();
+    }
+
   }
 
 

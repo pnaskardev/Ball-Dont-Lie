@@ -1,27 +1,132 @@
+import 'package:ball_dont_lie/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:neopop/widgets/cards/neopop_card.dart';
 
 final List<Tab> leagueTabs = <Tab>
 [
-  const Tab
+  Tab
   (
     // icon: Icon(Icons.directions_car),
-    child: Text('LaLiga')
+    child: NeoPopCard
+    (
+      color: Colors.white30,
+      borderColor: Colors.black,
+      vShadowColor: Colors.deepPurpleAccent,
+      hShadowColor: Colors.purpleAccent,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text
+        (
+          'LaLiga',
+          style: Styles.tabStyle,
+        ),
+      ),
+    )
   ),
-  const Tab
+  Tab
   (
-    // icon: Icon(Icons.directions_transit),
-    child: Text('Premier League'),
+    // child: Text('Premier League'),
+    child: NeoPopCard
+    (
+      color: Colors.white30,
+      borderColor: Colors.black,
+      vShadowColor: Colors.deepPurpleAccent,
+      hShadowColor: Colors.purpleAccent,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text
+        (
+          'Premier League',
+          style: Styles.tabStyle,
+        ),
+      ),
+    )
   ),
-  const Tab
+  Tab
   (
-    // icon: Icon(Icons.directions_transit),
-    child: Text('BundesLiga'),
+    // child: Text('BundesLiga'),
+    child: NeoPopCard
+    (
+      color: Colors.white30,
+      borderColor: Colors.black,
+      vShadowColor: Colors.deepPurpleAccent,
+      hShadowColor: Colors.purpleAccent,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text
+        (
+          'BundesLiga',
+          style: Styles.tabStyle,
+        ),
+      ),
+    )
   ),
-  const Tab
+  Tab
   (
-    // icon: Icon(Icons.directions_bike),
-    child: Text('ISL'),
+    // child: Text('ISL'),
+    child: NeoPopCard
+    (
+      color: Colors.white30,
+      borderColor: Colors.black,
+      vShadowColor: Colors.deepPurpleAccent,
+      hShadowColor: Colors.purpleAccent,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text
+        (
+          'ISL',
+          style: Styles.tabStyle,
+        ),
+      ),
+    )
   ),
+];
+
+
+final List<Tab> resultTabs=
+[
+  Tab
+  (
+    // child: Text('Results'),
+    child: NeoPopCard
+    (
+      color: Colors.white30,
+      borderColor: Colors.black,
+      vShadowColor: Colors.deepPurpleAccent,
+      hShadowColor: Colors.purpleAccent,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text
+        (
+          'Results',
+          style: Styles.tabStyle,
+        ),
+      ),
+    )
+  ),
+  // Tab
+  // (
+  //   // child: Text('Today'),
+  // ),
+  Tab
+  (
+    // child: Text('Fixtures'),
+    child: NeoPopCard
+    (
+      color: Colors.white30,
+      borderColor: Colors.black,
+      vShadowColor: Colors.deepPurpleAccent,
+      hShadowColor: Colors.purpleAccent,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text
+        (
+          'Fixtures',
+          style: Styles.tabStyle,
+        ),
+      ),
+    )
+  )
 ];
 
 // Map<int,Widget> MapIndexToWidget=

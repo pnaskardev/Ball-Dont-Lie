@@ -7,8 +7,8 @@ class ISlTeams with ChangeNotifier
 {
   List<Team> _islTeams=[];
   
-  bool isLoading=false;
-
+  bool isLoading=false; 
+  bool isError=false;
   final _service=ISLService();
   List<Team> get getTeams=> _islTeams;
 
@@ -26,14 +26,24 @@ class ISlTeams with ChangeNotifier
  
   Future<void> getIslTeams() async
   {
-    isLoading=true;
-    notifyListeners();
+    try 
+    {
+      isLoading=true;
+      notifyListeners();
 
-    final response= await _service.getislTeams();
-    
-    _islTeams=response;
-    isLoading=false;
-    notifyListeners();
+      final response= await _service.getislTeams();
+      
+      _islTeams=response;
+      isLoading=false;
+      notifyListeners();  
+    } catch (e) 
+    {
+      isLoading=false;
+      notifyListeners();
+
+      isError=true;
+      notifyListeners();
+    }
   }
 
 

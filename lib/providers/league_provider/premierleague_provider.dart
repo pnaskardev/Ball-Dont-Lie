@@ -7,7 +7,7 @@ class PremierLeagueTeams with ChangeNotifier
 {
   List<Team> _plTeams=[];
   bool isLoading=false;
-
+  bool isError=false;
   final _service=PLService();
 
   List<Team> get getTeams=>_plTeams;
@@ -25,14 +25,24 @@ class PremierLeagueTeams with ChangeNotifier
 
   Future<void> getPremierLeagueTeams() async
   {
-    isLoading=true;
-    notifyListeners();
+    try 
+    {
+      isLoading=true;
+      notifyListeners();
 
-    final response= await _service.getPLteams();
-    
-    _plTeams=response;
-    isLoading=false;
-    notifyListeners();
+      final response= await _service.getPLteams();
+      
+      _plTeams=response;
+      isLoading=false;
+      notifyListeners();  
+    } catch (e) 
+    {
+      isLoading=false;
+      notifyListeners();
+
+      isError=true;
+      notifyListeners();
+    }
   }
 
 }

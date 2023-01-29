@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:animations/animations.dart';
 import 'package:ball_dont_lie/features/Settings/screens/settings_page.dart';
 import 'package:ball_dont_lie/features/Standings/screens/standings_page.dart';
@@ -14,12 +16,19 @@ class NavBar extends StatefulWidget
 
 class _NavBarState extends State<NavBar> 
 {
+
+  final PageController controller = PageController();
+  @override
+  void dispose() 
+  {
+    controller.dispose();
+    super.dispose();
+  }
   int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) 
   {
-    
-    return   SafeArea
+    return SafeArea
     (
       child: Scaffold
       (
@@ -30,30 +39,90 @@ class _NavBarState extends State<NavBar>
         //   const Standings(),
         //   const SettingsPage(),
         // ][currentPageIndex],
-        body: PageTransitionSwitcher
+        body: PageView
         (
-          duration: const Duration(milliseconds: 900),
-          transitionBuilder: ((child,primaryAnimation,secondaryAnimation)
-          {
-            return FadeThroughTransition
-            (
-              animation: primaryAnimation, 
-              secondaryAnimation: secondaryAnimation,
-              child: child,
-            );
-          }),
-          child: <Widget>
+          // child: PageTransitionSwitcher
+          // (
+          //   duration: const Duration(milliseconds: 900),
+          //   transitionBuilder: ((child,primaryAnimation,secondaryAnimation)
+          //   {
+          //     return FadeThroughTransition
+          //     (
+          //       animation: primaryAnimation, 
+          //       secondaryAnimation: secondaryAnimation,
+          //       child: child,
+          //     );
+          //   }),
+          //   // child: <Widget>
+          //   // [
+          //   //   const HomePage(),
+          //   //   const Standings(),
+          //   //   const SettingsPage(),
+          //   // ][currentPageIndex]
+        
+          //   // State can be preserved with Stack
+        
+          //   // child: Stack
+          //   // (
+          //   //   children:  
+          //   //   [
+          //   //     Offstage
+          //   //     (
+          //   //       offstage: currentPageIndex!=0,
+          //   //       child:  HomePage()
+          //   //     ),
+          //   //     Offstage
+          //   //     (
+          //   //       offstage: currentPageIndex!=1,
+          //   //       child: Standings()
+          //   //     ),
+          //   //     Offstage
+          //   //     (
+          //   //       offstage: currentPageIndex!=2,
+          //   //       child: SettingsPage(),
+          //   //     )
+          //   //   ],
+          //   // ),
+        
+          //   // Indexed stack is the alternative to 
+          //   // child: IndexedStack
+          //   // (
+          //   //   index: currentPageIndex,
+          //   //   children: const <Widget>
+          //   //   [
+          //   //      HomePage(),
+          //   //      Standings(),
+          //   //      SettingsPage(),
+          //   //   ]
+          //   // ),
+          // ),
+          controller: controller,
+          children: const <Widget>
           [
-            const HomePage(),
-            // const ChooseTeam(),
-            const Standings(),
-            const SettingsPage(),
-          ][currentPageIndex]
+            HomePage(),
+            Standings(),
+            SettingsPage(),
+          ],
+          // onPageChanged has to be implemented so that if the 
+          // User swipes the tabs should be changed
+          onPageChanged: (index) 
+          {
+            setState(() 
+            {
+              currentPageIndex=index;
+            });  
+          },
         ),
         bottomNavigationBar: NavigationBar
         (
           onDestinationSelected: (int index)
           {
+            controller.animateToPage
+            (
+              index,
+              duration: Duration(milliseconds: 250),
+              curve: Curves.easeIn
+            );
             setState(() 
             {
               currentPageIndex = index;
@@ -65,14 +134,9 @@ class _NavBarState extends State<NavBar>
           [
             NavigationDestination
             (
-              icon: Icon(Icons.score_sharp),
+              icon: Icon(Icons.score),
               label: 'Scores',
             ),
-            // NavigationDestination
-            // (
-            //   icon: Icon(Icons.telegram),
-            //   label: 'Choose Teams',
-            // ),
             NavigationDestination
             (
               icon: Icon(Icons.table_bar_outlined),
