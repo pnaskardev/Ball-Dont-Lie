@@ -8,6 +8,7 @@ class Themes
     useMaterial3: true,
     scaffoldBackgroundColor: Colors.grey.shade900,
     colorScheme: const ColorScheme.dark(),
+    fontFamily: GoogleFonts.lexendDeca().fontFamily,
     textTheme: TextTheme
     (
       titleLarge: GoogleFonts.lexendDeca
