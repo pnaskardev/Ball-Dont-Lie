@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "788465611686",
+    "project_id": "balldon-tlie",
+    "storage_bucket": "balldon-tlie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788465611686:android:9acdf7af6b100a0d7ad567",
+        "android_client_info": {
+          "package_name": "com.priyanshunaskar.balldontlie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788465611686-ubs6vb8278vth7ucguhbnk34cdrvs7mg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrs5xEH0Tc-JEjPCDd5bgTA6Afg6WbtC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788465611686-ubs6vb8278vth7ucguhbnk34cdrvs7mg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "788465611686-vvv1dm4adpag4s9tuaje65otj5l0up7s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.priyanshunaskar.balldontlie"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
