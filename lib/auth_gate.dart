@@ -29,9 +29,9 @@ class AuthGate extends StatelessWidget
             );
           }
 
-        // Render your application if authenticated
-        return const NavBar();
-      },
+          // Render your application if authenticated
+          return const NavBar();
+        },
     );
   }
 }

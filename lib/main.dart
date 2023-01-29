@@ -1,10 +1,8 @@
 
 import 'package:ball_dont_lie/auth_gate.dart';
-import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/MatchDayFixtures/screens/matchday_fixtures_screen.dart';
 import 'package:ball_dont_lie/features/MatchDayResults/screens/match_day_result_screen.dart';
 import 'package:ball_dont_lie/firebase_options.dart';
-import 'package:ball_dont_lie/models/results.dart';
 import 'package:ball_dont_lie/providers/fixture_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/bundesliga_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
