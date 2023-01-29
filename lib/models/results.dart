@@ -13,15 +13,11 @@ class Results
   Results.fromJson(String key , List<dynamic> values ) 
   {
     day=key;
-    if (values != null) 
+    match = <Matchday>[];
+    values.forEach((v) 
     {
-      match = <Matchday>[];
-      values.forEach((v) 
-      {
-        match!.add(Matchday.fromJson(v));
-      });
-    }
-    
+      match!.add(Matchday.fromJson(v));
+    });
   }
 
   // Map<String, dynamic> toJson() 

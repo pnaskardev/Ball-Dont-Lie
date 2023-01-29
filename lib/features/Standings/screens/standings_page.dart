@@ -3,6 +3,7 @@ import 'package:ball_dont_lie/features/leagues/bundesliga/screens/bundesliga_scr
 import 'package:ball_dont_lie/features/leagues/laliga/screens/laliga_screen.dart';
 import 'package:ball_dont_lie/features/leagues/premierLeague/screens/premierleague_screen.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Standings extends StatefulWidget 
@@ -36,25 +37,27 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
               
               return <Widget>
               [
-                SliverAppBar.medium
+                SliverAppBar
                 (
-                  
                   pinned: true,
                   floating: true,
                   snap: true,
+                  expandedHeight: 300,
                   forceElevated: innerBoxIsScrolled,
-                  backgroundColor: Colors.white30,
-                  flexibleSpace: const FlexibleSpaceBar
+                  // backgroundColor: Colors.white30,
+                  flexibleSpace: FlexibleSpaceBar
                   (
                     collapseMode: CollapseMode.pin,
                     centerTitle: true,
-                    title:  Text
+                    title: Text
                     (
                       'Standings',
-                      style:TextStyle
-                      (
-                        color: Colors.black
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    background: CachedNetworkImage
+                    (
+                      imageUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                      fit: BoxFit.cover,
                     ),
                    
                   ),
@@ -80,7 +83,6 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
                     TabBar
                     (
                       isScrollable: true,
-                      labelColor: Colors.black,
                       tabs: leagueTabs,
                       
                     ),
@@ -97,28 +99,20 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
               (
                 children: 
                 [
-                   Tab
+                  Tab
                   (
-                    // icon: Icon(Icons.directions_car),
-                    // child: Text('LaLiga')
                     child: LaligaScreen(),
                   ),
                    Tab
                   (
-                    // icon: Icon(Icons.directions_transit),
-                    // child: Text('Premier League'),
                     child: PremierleagueScreen(),
                   ),
                    Tab
                   (
-                    // icon: Icon(Icons.directions_transit),
-                    // child: Text('BundesLiga'),
                     child: BundesligaScreen(),
                   ),
                    Tab
                   (
-                    // icon: Icon(Icons.directions_bike),
-                    // child: Text('ISL'),
                     child: IslScreen(),
                   ),
                 ],
@@ -148,7 +142,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate
     {
       return  Material
       (
-        color: Colors.white30,
+        // color: Colors.white30,
         child: _tabBar,
       );
     }

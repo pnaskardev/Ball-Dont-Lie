@@ -134,7 +134,7 @@ class _NavBarState extends State<NavBar>
           [
             NavigationDestination
             (
-              icon: Icon(Icons.score_sharp),
+              icon: Icon(Icons.score),
               label: 'Scores',
             ),
             NavigationDestination

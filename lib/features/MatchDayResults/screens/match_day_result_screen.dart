@@ -1,5 +1,6 @@
 import 'package:ball_dont_lie/features/MatchDayResults/widgets/MatchResultCard.dart';
 import 'package:ball_dont_lie/models/matchday.dart';
+import 'package:ball_dont_lie/models/results.dart';
 import 'package:flutter/material.dart';
 
 class MatchDayResults extends StatelessWidget 
@@ -10,19 +11,29 @@ class MatchDayResults extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    final args = ModalRoute.of(context)!.settings.arguments as List;
-    return Scaffold
+    // final args = ModalRoute.of(context)!.settings.arguments as List;
+    final args = ModalRoute.of(context)!.settings.arguments as Results;
+    final day=args.day;
+    final List<Matchday>list=args.match!;
+    return SafeArea
     (
-      body: ListView.builder
+      child: Scaffold
       (
-        itemCount: args.length,
-        itemBuilder: (context, index) 
-        {
-          return MatchResultCard
-          (
-            match: args[index],
-          );
-        }
+        appBar: AppBar
+        (
+          title: Text(day!),
+        ),
+        body: ListView.builder
+        (
+          itemCount: list.length,
+          itemBuilder: (context, index) 
+          {
+            return MatchResultCard
+            (
+              match: list[index],
+            );
+          }
+        ),
       ),
     );
   }

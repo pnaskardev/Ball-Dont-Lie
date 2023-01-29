@@ -1,6 +1,7 @@
 import 'package:ball_dont_lie/features/Results/screens/result_screen.dart';
-import 'package:ball_dont_lie/features/Today/screens/today_screen.dart';
+import 'package:ball_dont_lie/features/fixtures/screens/fixture_screen.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget 
@@ -34,24 +35,29 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
             {
               return <Widget>
               [
-                SliverAppBar.medium
+                SliverAppBar
                 (
                   pinned: true,
                   floating: false,
-                  backgroundColor: Colors.white30,
-                  flexibleSpace: const FlexibleSpaceBar
+                  // backgroundColor: Colors.white30,
+                  expandedHeight: 400,
+                  flexibleSpace: FlexibleSpaceBar
                   (
                     collapseMode: CollapseMode.pin,
                     centerTitle: true,
-                    title:  Text
+                    title: Text
                     (
                       'Home',
-                      style: TextStyle
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith
                       (
-                        color: Colors.black
+                        color: Colors.purpleAccent
                       ),
                     ),
-                   
+                    background: CachedNetworkImage
+                    (
+                      imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80',
+                      fit: BoxFit.cover, 
+                    ),
                   ),
                   // title: const Text('Teams'),
                   leading: IconButton
@@ -75,8 +81,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                   (
                     TabBar
                     (
-                      // isScrollable: true,
-                      labelColor: Colors.black,
                       tabs: resultTabs,
                     ),
                   ),
@@ -98,12 +102,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                   ),
                   Tab
                   (
-                    // child: Text('Today')
-                    child: TodayScreen(),
-                  ),
-                  Tab
-                  (
-                    child: Text('Fixtures')
+                    // child: Text('Fixtures')
+                    child: FixtureScreen(),
                   ),
                   
                 ],
@@ -115,6 +115,14 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
     );
   }
 }
+
+// Widget buildResult()=>const SliverToBoxAdapter
+// (
+//   child: Expanded
+//   (
+//     child: ResultScreen()
+//   ),
+// );
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate 
 {
@@ -132,8 +140,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate
     {
       return  Material
       (
-        
-        color: Colors.white30,
         child: _tabBar,
       );
     }

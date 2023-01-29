@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:ball_dont_lie/features/Results/widgets/card.dart';
+import 'package:ball_dont_lie/features/Results/widgets/result_card.dart';
 import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,33 +31,31 @@ class _ResultScreenState extends State<ResultScreen> with AutomaticKeepAliveClie
   @override
   Widget build(BuildContext context) 
   {
-    return SafeArea
+    super.build(context);
+    return Scaffold
     (
-      child: Scaffold
-      (
-        body: Consumer<ResultsProvider>(builder: (context, value, child)
+      
+      body: Consumer<ResultsProvider>(builder: (context, value, child)
+      {
+        if(value.isLoading==true)
         {
-          if(value.isLoading==true)
-          {
-            return const Center
-            (
-              child: CircularProgressIndicator(),
-            );
-          }
-          else if(value.isError==true)
-          {
-            return const Center
-            (
-              child: Icon(Icons.error),
-              // child: SizedBox(),
-            );
-          }
-          final fetchedResults=value.getResultsList;
-          log(fetchedResults.length.toString());
-          // return Text('faf');
-          return ResultCard(fetchedResults: fetchedResults);
-        },),
-      )
+          return const Center
+          (
+            child: CircularProgressIndicator(),
+          );
+        }
+        else if(value.isError==true)
+        {
+          return const Center
+          (
+            child: Icon(Icons.error),
+            // child: SizedBox(),
+          );
+        }
+        final fetchedResults=value.getResultsList;
+        log(fetchedResults.length.toString());
+        return ResultCard(fetchedResults: fetchedResults);
+      },),
     );
   }
 }
