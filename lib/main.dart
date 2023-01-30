@@ -16,11 +16,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-void main() async
+Future<void> main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs=await SharedPreferences.getInstance();
   await Firebase.initializeApp
   (
     options: DefaultFirebaseOptions.currentPlatform,
@@ -29,34 +31,22 @@ void main() async
   ([
     const EmailProviderConfiguration()
   ]);
-  runApp(const MyApp());
+  return runApp
+  (
+    ChangeNotifierProvider
+    (
+      create: (BuildContext context)=>ThemeProvider(isDarkMode: prefs.getBool("THEMESTATUS")!),
+      child:const MyApp()
+    ),
+    
+  );
 }
 
-class MyApp extends StatefulWidget 
+class MyApp extends StatelessWidget 
 {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> 
-{
-  ThemeProvider themeChangeProvider = ThemeProvider();
-
-  void getCurrentAppTheme() async
-  {
-    themeChangeProvider.darkTheme = await themeChangeProvider.themePref.getTheme(); 
-  }
-
-  @override
-  void initState() 
-  {
-    super.initState();
-    getCurrentAppTheme();
-  }
-
-  // This widget is the root of your application.
+  // ThemeProvider themeChangeProvider = ThemeProvider();
   @override
   Widget build(BuildContext context) 
   {
@@ -64,7 +54,10 @@ class _MyAppState extends State<MyApp>
     (
       providers:
       [
-        ChangeNotifierProvider<ThemeProvider>(create: (context)=>ThemeProvider()),
+        // ChangeNotifierProvider<ThemeProvider>(create: (context)=>ThemeProvider
+        // (
+        //   isDarkMode: prefs.getBool("THEMESTATUS")
+        // )),
         ChangeNotifierProvider<Teams>(create: (context)=>Teams()),
         ChangeNotifierProvider<LaligaTeams>(create: (context)=>LaligaTeams()),
         ChangeNotifierProvider<PremierLeagueTeams>(create: (context)=>PremierLeagueTeams()),
@@ -81,9 +74,9 @@ class _MyAppState extends State<MyApp>
           return MaterialApp
           (
             debugShowCheckedModeBanner: false,
-            theme: Themes.lightTheme ,
-            darkTheme: Themes.darkTheme,
-            themeMode: ThemeMode.system,
+            theme: value.getTheme ,
+            // darkTheme: Themes.darkTheme,
+            // themeMode: ThemeMode.system,
             home:  const AuthGate(),
             routes: 
             {
