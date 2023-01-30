@@ -10,6 +10,7 @@ import 'package:ball_dont_lie/providers/league_provider/laliga_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/premierleague_provider.dart';
 import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:ball_dont_lie/providers/teams.dart';
+import 'package:ball_dont_lie/providers/theme_provider.dart';
 import 'package:ball_dont_lie/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,29 @@ void main() async
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget 
+class MyApp extends StatefulWidget 
 {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> 
+{
+  ThemeProvider themeChangeProvider = ThemeProvider();
+
+  void getCurrentAppTheme() async
+  {
+    themeChangeProvider.darkTheme = await themeChangeProvider.themePref.getTheme(); 
+  }
+
+  @override
+  void initState() 
+  {
+    super.initState();
+    getCurrentAppTheme();
+  }
 
   // This widget is the root of your application.
   @override
@@ -43,6 +64,7 @@ class MyApp extends StatelessWidget
     (
       providers:
       [
+        ChangeNotifierProvider<ThemeProvider>(create: (context)=>ThemeProvider()),
         ChangeNotifierProvider<Teams>(create: (context)=>Teams()),
         ChangeNotifierProvider<LaligaTeams>(create: (context)=>LaligaTeams()),
         ChangeNotifierProvider<PremierLeagueTeams>(create: (context)=>PremierLeagueTeams()),
@@ -50,36 +72,25 @@ class MyApp extends StatelessWidget
         ChangeNotifierProvider<ISlTeams>(create: (context)=>ISlTeams()),
         ChangeNotifierProvider<ResultsProvider>(create: (context)=>ResultsProvider()),
         ChangeNotifierProvider<FixtureProvider>(create: (context)=>FixtureProvider()),
+        
       ],
-      child: MaterialApp
+      child: Consumer<ThemeProvider>
       (
-        debugShowCheckedModeBanner: false,
-        // theme: ThemeData
-        // (
-        //   useMaterial3: true,
-        //   appBarTheme: const AppBarTheme
-        //   (
-        //     centerTitle: true
-        //   ),
-        //   tabBarTheme: const TabBarTheme
-        //   (
-        //     labelColor: Colors.black,
-        //     // labelStyle: TextStyle(color: Colors.pink[800]), // color for text
-        //     indicator:  UnderlineTabIndicator
-        //     ( // color for indicator (underline)
-        //       borderSide: BorderSide(color: Colors.indigoAccent)
-        //     ),
-        //   ),
-        //   primarySwatch: Colors.blue,
-        // ),
-        theme: Themes.lightTheme ,
-        darkTheme: Themes.darkTheme,
-        themeMode: ThemeMode.system,
-        home:  const AuthGate(),
-        routes: 
+        builder: (context, value, child) 
         {
-          MatchDayResults.routeName:(context) => const MatchDayResults(),
-          MatchDayFixtures.routeName:(context) => const MatchDayFixtures(), 
+          return MaterialApp
+          (
+            debugShowCheckedModeBanner: false,
+            theme: Themes.lightTheme ,
+            darkTheme: Themes.darkTheme,
+            themeMode: ThemeMode.system,
+            home:  const AuthGate(),
+            routes: 
+            {
+              MatchDayResults.routeName:(context) => const MatchDayResults(),
+              MatchDayFixtures.routeName:(context) => const MatchDayFixtures(), 
+            },
+          );
         },
       ),
     );
