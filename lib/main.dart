@@ -56,7 +56,8 @@ class MyApp extends StatelessWidget
       [
         // ChangeNotifierProvider<ThemeProvider>(create: (context)=>ThemeProvider
         // (
-        //   isDarkMode: prefs.getBool("THEMESTATUS")
+        //   // isDarkMode: prefs.getBool("THEMESTATUS")
+        //   isDarkMode: true
         // )),
         ChangeNotifierProvider<Teams>(create: (context)=>Teams()),
         ChangeNotifierProvider<LaligaTeams>(create: (context)=>LaligaTeams()),
