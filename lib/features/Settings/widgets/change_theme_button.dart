@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:ball_dont_lie/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +21,8 @@ class ChangeThemeButton extends StatelessWidget
           value: theme.getDarkEnabled, 
           onChanged: (bool value)
           {
-            print(value);
-            // theme.swapTheme(value);
+            log(value.toString());
+            theme.swapTheme(value);
           } 
         );
       },

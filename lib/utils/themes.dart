@@ -26,18 +26,21 @@ class Themes
         fontSize: 30,
         fontWeight: FontWeight.bold,
         letterSpacing: 4,
+        color: Colors.white
       ),
       titleMedium: GoogleFonts.lexendDeca
       (
         fontSize: 20,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
+        color: Colors.white
       ),
       titleSmall: GoogleFonts.lexendDeca
       (
         fontSize: 10,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
+        color: Colors.white
       ),
     )
   );
@@ -54,18 +57,21 @@ class Themes
         fontSize: 30,
         fontWeight: FontWeight.bold,
         letterSpacing: 4,
+        color: Colors.black
       ),
       titleMedium: GoogleFonts.lexendDeca
       (
         fontSize: 20,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
+        color: Colors.black
       ),
       titleSmall: GoogleFonts.lexendDeca
       (
         fontSize: 10,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
+        color: Colors.black
       ),
     )
   );
