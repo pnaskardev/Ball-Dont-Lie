@@ -3,6 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Themes
 {
+  static ThemeData themefun(bool isDarkTheme,BuildContext context)
+  {
+    if(isDarkTheme==true)
+    {
+      return darkTheme;
+    }
+    return lightTheme;
+  }
+
+
   static final darkTheme=ThemeData
   (
     useMaterial3: true,
@@ -16,18 +26,21 @@ class Themes
         fontSize: 30,
         fontWeight: FontWeight.bold,
         letterSpacing: 4,
+        color: Colors.white
       ),
       titleMedium: GoogleFonts.lexendDeca
       (
         fontSize: 20,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
+        color: Colors.white
       ),
       titleSmall: GoogleFonts.lexendDeca
       (
         fontSize: 10,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
+        color: Colors.white
       ),
     )
   );
@@ -37,10 +50,30 @@ class Themes
     useMaterial3: true,
     scaffoldBackgroundColor: Colors.white,
     colorScheme: const ColorScheme.light(),
-    // textTheme: const TextTheme
-    // (
-    //   titleLarge: 
-    // )
+    textTheme: TextTheme
+    (
+      titleLarge: GoogleFonts.lexendDeca
+      (
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 4,
+        color: Colors.black
+      ),
+      titleMedium: GoogleFonts.lexendDeca
+      (
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 2,
+        color: Colors.black
+      ),
+      titleSmall: GoogleFonts.lexendDeca
+      (
+        fontSize: 10,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 2,
+        color: Colors.black
+      ),
+    )
   );
 
 
