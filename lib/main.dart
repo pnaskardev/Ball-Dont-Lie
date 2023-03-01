@@ -11,6 +11,7 @@ import 'package:ball_dont_lie/providers/league_provider/premierleague_provider.d
 import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:ball_dont_lie/providers/teams.dart';
 import 'package:ball_dont_lie/providers/theme_provider.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ Future<void> main() async
   (
     ChangeNotifierProvider
     (
-      create: (BuildContext context)=>ThemeProvider(isDarkMode: prefs.getBool("THEMESTATUS")!),
+      create: (BuildContext context)=>ThemeProvider(isDarkMode: prefs.getBool("THEMESTATUS")?? true),
       child:const MyApp()
     ),
     
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget
         ChangeNotifierProvider<ISlTeams>(create: (context)=>ISlTeams()),
         ChangeNotifierProvider<ResultsProvider>(create: (context)=>ResultsProvider()),
         ChangeNotifierProvider<FixtureProvider>(create: (context)=>FixtureProvider()),
+        ChangeNotifierProvider<UserProvider>(create: (context)=>UserProvider()),
         
       ],
       child: Consumer<ThemeProvider>

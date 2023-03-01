@@ -1,4 +1,5 @@
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
+import 'package:ball_dont_lie/wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
@@ -30,8 +31,8 @@ class AuthGate extends StatelessWidget
           }
 
           // Render your application if authenticated
-          return const NavBar();
+          return const Wrapper();
         },
-    );
+      );
   }
 }

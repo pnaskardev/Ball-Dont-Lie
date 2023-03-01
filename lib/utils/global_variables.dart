@@ -144,18 +144,18 @@ final List<Tab> resultTabs=
 
 
 
-Map<String,String> leagueHeaders =
-{
-  'premierLeague':"premierleague",
-  'laliga':"laliga",
-  'bundesliga':"bundesliga",
-  'europaleague':"europaleague",
-  'eredivisie':"eredivisie",
-  'europaconferenceleague':"europaconferenceleague",
-  'fifaclubworldcup':"fifaclubworldcup",
-  'indiansuperleague':"indiansuperleague",
-  'majorleaguesoccer':"majorleaguesoccer",
-};
+var leagueHeaders =
+[
+  {'Items':"premierleague",},
+  {'Items':"laliga",},
+  {'Items':"bundesliga",},
+  {'Items':"europaleague"},
+  {'Items':"eredivisie"},
+  {'Items':"europaconferenceleague"},
+  {'Items':"fifaclubworldcup"},
+  {'Items':"indiansuperleague"},
+  {'Items':"majorleaguesoccer"},
+];
 
 
 Map<int,String> indexLeagueHeaders =
