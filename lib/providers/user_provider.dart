@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ball_dont_lie/models/user.dart' as model;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,9 +9,11 @@ class UserProvider with ChangeNotifier
 {
   static String? clientId;
   static bool didSignOut = false;
-
+  static model.User? user;
   List<model.User> users = [];
 
+
+  get getClientId=>clientId!;
 
   User? firebaseUser;
   Future<void> getFirebaseUser() async 
@@ -37,12 +41,20 @@ class UserProvider with ChangeNotifier
 
   Future<void> adduser(model.User t) async 
   {
-    CollectionReference users = FirebaseFirestore.instance.collection('users1');
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
     String clientId = t.uid;
     await users.doc(clientId).set(t.toJson());
     await fetchAndSetusers();
+    user=t;
     notifyListeners();
     return;
+  }
+
+  void addLeague(String league)
+  {
+    user!.selectedLeags.add(league);
+    log(league);
+    notifyListeners();
   }
 
 }

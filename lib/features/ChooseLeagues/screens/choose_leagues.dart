@@ -1,6 +1,13 @@
+import 'dart:developer';
+
+import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/widgets/action_widget.dart';
+import 'package:ball_dont_lie/models/user.dart';
+import 'package:ball_dont_lie/providers/league_provider/league_provider.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class ChooseLeagues extends StatefulWidget 
@@ -89,13 +96,6 @@ class _ChooseLeaguesState extends State<ChooseLeagues>
                       {
                         return ActionWidget(league: leagueHeaders[index]['Items']!);
                       }),
-                      // children: leagueHeaders.map
-                      // (
-                      //   (iterator)
-                      //   {
-                      //     return ActionWidget(league: iterator['Items']!);
-                      //   }
-                      // ),
                     )
               
                   ],
@@ -107,7 +107,29 @@ class _ChooseLeaguesState extends State<ChooseLeagues>
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton.extended
         (
-          onPressed: (){}, 
+          onPressed: () async
+          {
+            User user=User
+            (
+              uid: Provider.of<UserProvider>(context,listen: false).getClientId, 
+              name: _firstnameController.text, 
+              selectedLeags: Provider.of<LeagueProvider>(context,listen: false).getList
+            );
+            try 
+            {
+              await Provider.of<UserProvider>(context,listen: false).adduser(user);
+              Navigator.pushReplacement
+              (
+                context,
+                MaterialPageRoute(builder: (context)=>const NavBar()) 
+              );  
+            } 
+            catch (e) 
+            {
+              log(e.toString());
+              throw Exception(e);
+            }
+          }, 
           label: const Text('Continue'),
         ), 
       ) 

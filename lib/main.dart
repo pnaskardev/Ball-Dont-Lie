@@ -7,6 +7,7 @@ import 'package:ball_dont_lie/providers/fixture_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/bundesliga_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/laliga_provider.dart';
+import 'package:ball_dont_lie/providers/league_provider/league_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/premierleague_provider.dart';
 import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:ball_dont_lie/providers/teams.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget
         ChangeNotifierProvider<ResultsProvider>(create: (context)=>ResultsProvider()),
         ChangeNotifierProvider<FixtureProvider>(create: (context)=>FixtureProvider()),
         ChangeNotifierProvider<UserProvider>(create: (context)=>UserProvider()),
+        ChangeNotifierProvider<LeagueProvider>(create: (context)=>LeagueProvider()),
         
       ],
       child: Consumer<ThemeProvider>

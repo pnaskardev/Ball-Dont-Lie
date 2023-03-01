@@ -1,4 +1,7 @@
+import 'package:ball_dont_lie/providers/league_provider/league_provider.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ActionWidget extends StatefulWidget 
 {
@@ -25,6 +28,7 @@ class _ActionWidgetState extends State<ActionWidget> {
         {
           _isSelected=selected;  
         });
+        Provider.of<LeagueProvider>(context,listen: false).addLeague(widget.league);
       },
       deleteIcon: const Icon(Icons.delete),
       onDeleted: () 
