@@ -33,7 +33,14 @@ class _ActionWidgetState extends State<ActionWidget> {
       deleteIcon: const Icon(Icons.delete),
       onDeleted: () 
       {
-
+        setState(() 
+        {
+          if(_isSelected==true)
+          {
+            _isSelected=false;
+          } 
+        });
+        Provider.of<LeagueProvider>(context,listen: false).deleteLeague(widget.league);
       },
     );
   }

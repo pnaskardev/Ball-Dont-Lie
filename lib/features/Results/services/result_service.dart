@@ -6,12 +6,12 @@ import 'package:ball_dont_lie/models/results.dart';
 import 'package:http/http.dart' as http; 
 class ResultService
 {
-  Future<List<Results>> getResults() async
+  Future<List<Results>> getResults(String favLeague) async
   {
     List<Results>tempList=[];
     try 
     {
-      var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/laliga/results'),headers: Headers.requestHeaders);
+      var response = await http.get(Uri.https(Headers.requestHeaders['X-RapidAPI-Host']!,'/$favLeague/results'),headers: Headers.requestHeaders);
       var jsonData=jsonDecode((response.body));
       jsonData[0].forEach((k,v)
       {

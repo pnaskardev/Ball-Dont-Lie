@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/screens/choose_leagues.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Wrapper extends StatefulWidget 
 {
@@ -17,8 +20,11 @@ class _WrapperState extends State<Wrapper>
   bool isData = false;
   bool isLoading = true;
 
-  void initiate() async {
+
+  void initiate() async 
+  {
     UserProvider.setUid();
+    
     var uid = UserProvider.clientId;
     await FirebaseFirestore.instance.collection('users').doc(uid).get().then
     (
@@ -57,7 +63,21 @@ class _WrapperState extends State<Wrapper>
     } 
     else if (isData) 
     {
-      return const NavBar();
+      return FutureBuilder
+      (
+        future: Provider.of<UserProvider>(context,listen: false).setUser(),
+        builder: (context, snapshot) 
+        {
+          if(snapshot.connectionState==ConnectionState.waiting)
+          {
+            return const Center
+            (
+              child: CircularProgressIndicator(),
+            );
+          }
+          return const NavBar();
+        }
+      );
     } 
     else 
     {
