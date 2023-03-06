@@ -13,6 +13,7 @@ import 'package:ball_dont_lie/providers/league_provider/premierleague_provider.d
 import 'package:ball_dont_lie/providers/results_provider.dart';
 import 'package:ball_dont_lie/providers/teams.dart';
 import 'package:ball_dont_lie/providers/theme_provider.dart';
+import 'package:ball_dont_lie/providers/transfer_provider.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget
         ChangeNotifierProvider<UserProvider>(create: (context)=>UserProvider()),
         ChangeNotifierProvider<LeagueProvider>(create: (context)=>LeagueProvider()),
         ChangeNotifierProvider<FavProvider>(create: (context)=>FavProvider()),
+        ChangeNotifierProvider<TransferProvider>(create: (context)=>TransferProvider()),
         
       ],
       child: Consumer<ThemeProvider>
