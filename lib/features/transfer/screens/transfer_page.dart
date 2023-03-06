@@ -1,3 +1,4 @@
+import 'package:ball_dont_lie/features/Webview/webview_screen.dart';
 import 'package:ball_dont_lie/providers/transfer_provider.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -62,57 +63,70 @@ class _TransferPageState extends State<TransferPage> with AutomaticKeepAliveClie
             itemCount: fetchedNews.length,
             itemBuilder:(context,index)
             {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: NeoPopCard
-                (
-                  color: Colors.white24,
-                  borderColor:Colors.black,
-                  depth: 10,
-                  hShadowColor: Colors.purpleAccent,
-                  vShadowColor: Colors.deepPurpleAccent,
-                  child: ListTile
+              return InkWell
+              (
+                onTap: ()
+                {
+                  Navigator.of(context).push
                   (
-                    leading: CircleAvatar
+                    MaterialPageRoute
                     (
-                      child: CachedNetworkImage
+                      builder: (context)=>WebViewApp(url:fetchedNews[index].newsLink!) 
+                    )
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: NeoPopCard
+                  (
+                    color: Colors.white24,
+                    borderColor:Colors.black,
+                    depth: 10,
+                    hShadowColor: Colors.purpleAccent,
+                    vShadowColor: Colors.deepPurpleAccent,
+                    child: ListTile
+                    (
+                      leading: CircleAvatar
                       (
-                        width: 80.0,
-                        height: 80.0,
-                        imageUrl: fetchedNews[index].image!,
-                        progressIndicatorBuilder: (context, url, progress)
-                        {
-                          return CircularProgressIndicator
-                          (
-                            value: progress.progress,
-                          );
-                        },
-                        errorWidget: (context, url, error) 
-                        {
-                          return const Icon(Icons.error);
-                        }, 
+                        child: CachedNetworkImage
+                        (
+                          width: 80.0,
+                          height: 80.0,
+                          imageUrl: fetchedNews[index].image!,
+                          progressIndicatorBuilder: (context, url, progress)
+                          {
+                            return CircularProgressIndicator
+                            (
+                              value: progress.progress,
+                            );
+                          },
+                          errorWidget: (context, url, error) 
+                          {
+                            return const Icon(Icons.error);
+                          }, 
+                        ),
                       ),
+                      title: Text(fetchedNews[index].title!,style: Theme.of(context).textTheme.titleMedium,),
+                      subtitle: Text(fetchedNews[index].publisherDate!),
+                      // trailing: ClipOval
+                      // (
+                      //   child: CachedNetworkImage
+                      //   (
+                      //     imageUrl: fetchedNews[index].publisherName!,
+                      //     progressIndicatorBuilder: (context, url, progress)
+                      //     {
+                      //       return CircularProgressIndicator
+                      //       (
+                      //         value: progress.progress,
+                      //       );
+                      //     },
+                      //     errorWidget: (context, url, error) 
+                      //     {
+                      //       return const Icon(Icons.error);
+                      //     }, 
+                      //   ),
+                      // ),
                     ),
-                    title: Text(fetchedNews[index].title!),
-                    subtitle: Text(fetchedNews[index].publisherDate!),
-                    // trailing: ClipOval
-                    // (
-                    //   child: CachedNetworkImage
-                    //   (
-                    //     imageUrl: fetchedNews[index].publisherName!,
-                    //     progressIndicatorBuilder: (context, url, progress)
-                    //     {
-                    //       return CircularProgressIndicator
-                    //       (
-                    //         value: progress.progress,
-                    //       );
-                    //     },
-                    //     errorWidget: (context, url, error) 
-                    //     {
-                    //       return const Icon(Icons.error);
-                    //     }, 
-                    //   ),
-                    // ),
                   ),
                 ),
               );

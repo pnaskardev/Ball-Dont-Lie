@@ -51,7 +51,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 [
                   Padding
                   (
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: ListTile
                     (
                       title: Text('Profile Information',style: Theme.of(context).textTheme.titleLarge,),
