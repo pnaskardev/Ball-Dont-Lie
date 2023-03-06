@@ -1,8 +1,10 @@
 import 'package:ball_dont_lie/features/Results/screens/result_screen.dart';
 import 'package:ball_dont_lie/features/fixtures/screens/fixture_screen.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget 
 {
@@ -17,6 +19,26 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
 
   @override
   bool get wantKeepAlive => true;
+
+  bool _isInit = true;
+
+  @override
+  void didChangeDependencies() async
+  {
+    super.didChangeDependencies();
+    if(_isInit)
+    {
+      await Provider.of<UserProvider>(context, listen: false)
+          .fetchAndSetusers()
+          .then((value) async =>
+          {
+            
+            await Provider.of<UserProvider>(context, listen: false)
+                      .setUser()
+          });
+    }
+    _isInit=false;
+  }
 
   @override
   Widget build(BuildContext context) 

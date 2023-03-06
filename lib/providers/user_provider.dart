@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier
 {
+
+  bool isLoading=false;
+  bool isError=false;
+
   static String? clientId;
   static bool didSignOut = false;
   static model.User? user;
@@ -26,6 +30,23 @@ class UserProvider with ChangeNotifier
     clientId = FirebaseAuth.instance.currentUser!.uid.toString();
   }
 
+  Future<void> setUser() async
+  {
+   try 
+   {
+    await fetchAndSetusers();  
+    user=users.firstWhere((e)=>e.uid==clientId);
+    log(user!.uid);
+   } 
+   catch (e) 
+   {
+    log(e.toString());
+     throw Exception(e.toString());
+   }
+    
+  }
+
+
   Future<void> fetchAndSetusers() async 
   {
     CollectionReference _collectionRef =FirebaseFirestore.instance.collection('users');
@@ -35,17 +56,32 @@ class UserProvider with ChangeNotifier
         .toList()
         .map((e) => model.User.fromJson(e as Map<String, dynamic>))
         .toList();
+    log(users.length.toString());
     notifyListeners();
   }
+
 
 
   Future<void> adduser(model.User t) async 
   {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     String clientId = t.uid;
-    await users.doc(clientId).set(t.toJson());
-    await fetchAndSetusers();
-    user=t;
+    try 
+    {
+      isLoading=true;
+      notifyListeners();
+      await users.doc(clientId).set(t.toJson());
+      await fetchAndSetusers();
+      user=t;  
+      isLoading=false;
+      notifyListeners();
+    } catch (e) 
+    {
+      log(e.toString());
+      isError=true;
+      notifyListeners();
+      throw Exception(e);
+    }
     notifyListeners();
     return;
   }

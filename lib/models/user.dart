@@ -6,9 +6,10 @@ class User
 {
   late String uid;
   late String name;  
+  late String favLeague;
   late List<String> selectedLeags;
 
-  User({required this.uid,required this.name,required this.selectedLeags});  
+  User({required this.uid,required this.name,required this.selectedLeags,required this.favLeague});  
 
 
   factory User.fromJson(Map<String,dynamic>map)=>_$UserFromJson(map);

@@ -12,7 +12,7 @@ class FixtureProvider with ChangeNotifier
   List<Fixture> _results=[];
   List<Fixture> get getResultsList=>_results;
 
-  Future<void> getResults()async
+  Future<void> getResults(String favLeague) async
   {
     
     try 
@@ -20,7 +20,7 @@ class FixtureProvider with ChangeNotifier
       isLoading=true;
       notifyListeners();
       
-      final response=await _service.getResults();
+      final response=await _service.getResults(favLeague);
       _results=response;
       isLoading=false;
       notifyListeners();

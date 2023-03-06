@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ball_dont_lie/features/Results/widgets/result_card.dart';
 import 'package:ball_dont_lie/providers/results_provider.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,7 @@ class _ResultScreenState extends State<ResultScreen> with AutomaticKeepAliveClie
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
     {
-      Provider.of<ResultsProvider>(context,listen: false).getResults();
+      Provider.of<ResultsProvider>(context,listen: false).getResults(UserProvider.user!.favLeague);
     });
   }
 

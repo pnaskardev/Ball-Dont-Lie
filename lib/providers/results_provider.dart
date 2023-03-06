@@ -10,7 +10,7 @@ class ResultsProvider with ChangeNotifier
   List<Results> _results=[];
   List<Results> get getResultsList=>_results;
 
-  Future<void> getResults()async
+  Future<void> getResults(String favLeague)async
   {
     
 
@@ -19,7 +19,7 @@ class ResultsProvider with ChangeNotifier
       isLoading=true;
       notifyListeners();
       
-      final response=await _service.getResults();
+      final response=await _service.getResults(favLeague);
       _results=response;
       isLoading=false;
       notifyListeners();

@@ -3,6 +3,7 @@ import 'package:ball_dont_lie/auth_gate.dart';
 import 'package:ball_dont_lie/features/MatchDayFixtures/screens/matchday_fixtures_screen.dart';
 import 'package:ball_dont_lie/features/MatchDayResults/screens/match_day_result_screen.dart';
 import 'package:ball_dont_lie/firebase_options.dart';
+import 'package:ball_dont_lie/providers/fav_league_provider.dart';
 import 'package:ball_dont_lie/providers/fixture_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/bundesliga_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/isl_provider.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget
         ChangeNotifierProvider<FixtureProvider>(create: (context)=>FixtureProvider()),
         ChangeNotifierProvider<UserProvider>(create: (context)=>UserProvider()),
         ChangeNotifierProvider<LeagueProvider>(create: (context)=>LeagueProvider()),
+        ChangeNotifierProvider<FavProvider>(create: (context)=>FavProvider()),
         
       ],
       child: Consumer<ThemeProvider>

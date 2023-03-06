@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/widgets/action_widget.dart';
+import 'package:ball_dont_lie/features/ChooseLeagues/widgets/single_selectable_widget.dart';
 import 'package:ball_dont_lie/models/user.dart';
+import 'package:ball_dont_lie/providers/fav_league_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/league_provider.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
@@ -86,7 +88,12 @@ class _ChooseLeaguesState extends State<ChooseLeagues>
                         ),
                       ),
                     ),
-        
+                   
+                    const SingleSelectableWidget(),
+                    const ListTile
+                    (
+                      title: Text('Select the leagues you wanna see standings for'),
+                    ),
                     GridView.count
                     (
                       physics: const NeverScrollableScrollPhysics(),
@@ -113,7 +120,9 @@ class _ChooseLeaguesState extends State<ChooseLeagues>
             (
               uid: Provider.of<UserProvider>(context,listen: false).getClientId, 
               name: _firstnameController.text, 
-              selectedLeags: Provider.of<LeagueProvider>(context,listen: false).getList
+              selectedLeags: context.read<LeagueProvider>().getList,
+              favLeague: context.read<FavProvider>().getFav
+              // favLeague: Provider.of<FavProvider>(context,listen: false).getFav
             );
             try 
             {

@@ -12,4 +12,10 @@ class LeagueProvider with ChangeNotifier
     notifyListeners();
   }
 
+  void deleteLeague(String l)
+  {
+    selectedLeagues.remove(l);
+    notifyListeners();
+  }
+
 }

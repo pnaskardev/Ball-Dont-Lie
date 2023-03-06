@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:ball_dont_lie/features/Results/widgets/result_card.dart';
 import 'package:ball_dont_lie/features/fixtures/widgets/fixture_card.dart';
 import 'package:ball_dont_lie/providers/fixture_provider.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +25,7 @@ class _FixtureScreenState extends State<FixtureScreen> with AutomaticKeepAliveCl
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
     {
-      Provider.of<FixtureProvider>(context,listen: false).getResults();
+      Provider.of<FixtureProvider>(context,listen: false).getResults(UserProvider.user!.favLeague);
     });
   }
 
