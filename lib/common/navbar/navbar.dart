@@ -1,10 +1,10 @@
 
 // ignore_for_file: prefer_const_constructors
 
-import 'package:animations/animations.dart';
 import 'package:ball_dont_lie/features/Settings/screens/settings_page.dart';
 import 'package:ball_dont_lie/features/Standings/screens/standings_page.dart';
 import 'package:ball_dont_lie/features/home/screens/homepage.dart';
+import 'package:ball_dont_lie/features/transfer/screens/transfer_page.dart';
 import 'package:flutter/material.dart';
 class NavBar extends StatefulWidget 
 {
@@ -101,6 +101,7 @@ class _NavBarState extends State<NavBar>
           [
             HomePage(),
             Standings(),
+            TransferPage(),
             SettingsPage(),
           ],
           // onPageChanged has to be implemented so that if the 
@@ -141,6 +142,11 @@ class _NavBarState extends State<NavBar>
             (
               icon: Icon(Icons.table_bar_outlined),
               label: 'Standings',
+            ),
+            NavigationDestination
+            (
+              icon: Icon(Icons.newspaper),
+              label: 'League News',
             ),
             NavigationDestination
             (
