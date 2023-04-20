@@ -2,6 +2,7 @@ import 'package:ball_dont_lie/Auth/login_screen.dart';
 import 'package:ball_dont_lie/Auth/signup_screen.dart';
 import 'package:ball_dont_lie/features/MatchDayFixtures/screens/matchday_fixtures_screen.dart';
 import 'package:ball_dont_lie/features/MatchDayResults/screens/match_day_result_screen.dart';
+import 'package:ball_dont_lie/wrapper.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -12,6 +13,8 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case SignupScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => SignupScreen());
+    case Wrapper.routeName:
+      return MaterialPageRoute(settings: routeSettings ,builder: (_) => const Wrapper());
     case MatchDayResults.routeName:
       return MaterialPageRoute(
         builder: (_) => const MatchDayResults(),

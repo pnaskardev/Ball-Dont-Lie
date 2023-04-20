@@ -3,9 +3,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:ball_dont_lie/models/user.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
+import 'package:ball_dont_lie/utils/error-handle.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:ball_dont_lie/utils/utils.dart';
+import 'package:ball_dont_lie/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -38,7 +41,6 @@ class AuthService {
         return 1;
       }
     } catch (e) {
-      log('---->${e.toString()}');
       showSnackBar(context, '${e.toString}', false);
     }
     return 0;
@@ -49,45 +51,42 @@ class AuthService {
     required BuildContext context,
     required String name,
     required String email,
-    required String phone,
     required String password,
   }) async {
-    log('sign up user');
-    // try {
-    //   User user = User
-    //   (
-    //     id: '',
-    //     name: name,
-    //     email: email,
-    //     phone: phone,
-    //     password: password,
-    //     token: '',
-    //     contacts: []
-    //   );
-    //   http.Response res = await http.post(Uri.parse('$uri/auth/signup'),
-    //       // body: user.toJson(),
-    //       body: user.toJson(),
-    //       headers: <String, String>{
-    //         'Content-Type': 'application/json; charset=UTF-8'
-    //         // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    //       });
-    //   httpErrorHandle(
-    //       response: res,
-    //       context: context,
-    //       onSuccess: () async {
-    //         showSnackBar(context, 'Account created!!',true);
-    //         SharedPreferences prefs = await SharedPreferences.getInstance();
-    //         await prefs.setString(
-    //             'x-auth-token', jsonDecode(res.body)['token']);
-    //         Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-    //         Navigator.pushNamedAndRemoveUntil(
-    //             context, HomeScreen.routeName, (route) => false);
-    //       });
-    // } catch (e) {
-    //   log('$uri/auth/signup');
-    //   log(e.toString());
-    //   showSnackBar(context, '${e.toString}',false);
-    // }
+    try {
+      User user = User
+      (
+        id: '',
+        name: name,
+        email: email,
+        password: password,
+        token: '',
+        selectedLeagues: []
+      );
+      http.Response res = await http.post(Uri.parse('$uri/auth/signup'),
+          // body: user.toJson(),
+          body: user.toJson(),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+            // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          });
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () async {
+            showSnackBar(context, 'Account created!!',true);
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString(
+                'x-auth-token', jsonDecode(res.body)['token']);
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+            Navigator.pushNamedAndRemoveUntil(
+                context, Wrapper.routeName, (route) => false);
+          });
+    } catch (e) {
+      log('$uri/auth/signup');
+      log(e.toString());
+      showSnackBar(context, '${e.toString}',false);
+    }
   }
 
   void signInUser({
@@ -96,29 +95,29 @@ class AuthService {
     required String password,
   }) async {
     log('sign in user');
-    // try {
-    //   http.Response res = await http.post(Uri.parse('$uri/auth/signin'),
-    //       // body: user.toJson(),
-    //       body: json.encode({'name': name, 'password': password}),
-    //       headers: <String, String>{
-    //         'Content-Type': 'application/json; charset=UTF-8'
-    //       });
-    //   // print(res.body);
-    //   httpErrorHandle(
-    //       response: res,
-    //       context: context,
-    //       onSuccess: () async {
-    //         SharedPreferences prefs = await SharedPreferences.getInstance();
-    //         await prefs.setString(
-    //             'x-auth-token', jsonDecode(res.body)['token']);
-    //         Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-    //         Navigator.pushNamedAndRemoveUntil(
-    //             context, HomeScreen.routeName, (route) => false);
-    //       });
-    // } catch (e) {
-    //   log('$uri/auth/signup');
-    //   log(e.toString());
-    //   showSnackBar(context, '${e.toString}',false);
-    // }
+    try {
+      http.Response res = await http.post(Uri.parse('$uri/auth/signin'),
+          // body: user.toJson(),
+          body: json.encode({'name': name, 'password': password}),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+      // print(res.body);
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString(
+                'x-auth-token', jsonDecode(res.body)['token']);
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+            Navigator.pushNamedAndRemoveUntil(
+                context, Wrapper.routeName, (route) => false);
+          });
+    } catch (e) {
+      log('$uri/auth/signup');
+      log(e.toString());
+      showSnackBar(context, '${e.toString}',false);
+    }
   }
 }

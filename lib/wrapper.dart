@@ -1,13 +1,12 @@
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/screens/choose_leagues.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
-import 'package:ball_dont_lie/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
-
+  static const routeName = '/wrapper';
   @override
   State<Wrapper> createState() => _WrapperState();
 }
