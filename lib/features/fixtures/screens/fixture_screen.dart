@@ -23,10 +23,10 @@ class _FixtureScreenState extends State<FixtureScreen> with AutomaticKeepAliveCl
   void initState() 
   {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
-    {
-      Provider.of<FixtureProvider>(context,listen: false).getResults(UserProvider.user!.favLeague);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
+    // {
+    //   Provider.of<FixtureProvider>(context,listen: false).getResults(UserProvider.user!.favLeague);
+    // });
   }
 
 
@@ -34,32 +34,33 @@ class _FixtureScreenState extends State<FixtureScreen> with AutomaticKeepAliveCl
   Widget build(BuildContext context) 
   {
     super.build(context);
-    return SafeArea
+    return const SafeArea
     (
       child: Scaffold
       (
-        body: Consumer<FixtureProvider>(builder: (context, value, child)
-          {
-            if(value.isLoading==true)
-            {
-              return const Center
-              (
-                child: CircularProgressIndicator(),
-              );
-            }
-            else if(value.isError==true)
-            {
-              return const Center
-              (
-                child: Icon(Icons.error),
-                // child: SizedBox(),
-              );
-            }
-            final fetchedResults=value.getResultsList;
-            log(fetchedResults.length.toString());
-            return FixtureCard(fetchedResults: fetchedResults);
-          }
-        )
+        // body: Consumer<FixtureProvider>(builder: (context, value, child)
+        //   {
+        //     if(value.isLoading==true)
+        //     {
+        //       return const Center
+        //       (
+        //         child: CircularProgressIndicator(),
+        //       );
+        //     }
+        //     else if(value.isError==true)
+        //     {
+        //       return const Center
+        //       (
+        //         child: Icon(Icons.error),
+        //         // child: SizedBox(),
+        //       );
+        //     }
+        //     final fetchedResults=value.getResultsList;
+        //     log(fetchedResults.length.toString());
+        //     return FixtureCard(fetchedResults: fetchedResults);
+        //   }
+        // )
+        body: Center(child: Text('Fixture Screen'),),
       )
     );
   }

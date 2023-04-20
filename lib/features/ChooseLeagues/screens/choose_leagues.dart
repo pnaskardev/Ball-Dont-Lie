@@ -3,13 +3,8 @@ import 'dart:developer';
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/widgets/action_widget.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/widgets/single_selectable_widget.dart';
-import 'package:ball_dont_lie/models/user.dart';
-import 'package:ball_dont_lie/providers/fav_league_provider.dart';
-import 'package:ball_dont_lie/providers/league_provider/league_provider.dart';
-import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 
 class ChooseLeagues extends StatefulWidget 
@@ -116,17 +111,17 @@ class _ChooseLeaguesState extends State<ChooseLeagues>
         (
           onPressed: () async
           {
-            User user=User
-            (
-              uid: Provider.of<UserProvider>(context,listen: false).getClientId, 
-              name: _firstnameController.text, 
-              selectedLeags: context.read<LeagueProvider>().getList,
-              favLeague: context.read<FavProvider>().getFav
-              // favLeague: Provider.of<FavProvider>(context,listen: false).getFav
-            );
+            // User user=User
+            // (
+            //   uid: Provider.of<UserProvider>(context,listen: false).getClientId, 
+            //   name: _firstnameController.text, 
+            //   selectedLeags: context.read<LeagueProvider>().getList,
+            //   favLeague: context.read<FavProvider>().getFav
+            //   // favLeague: Provider.of<FavProvider>(context,listen: false).getFav
+            // );
             try 
             {
-              await Provider.of<UserProvider>(context,listen: false).adduser(user);
+              // await Provider.of<UserProvider>(context,listen: false).adduser(user);
               Navigator.pushReplacement
               (
                 context,

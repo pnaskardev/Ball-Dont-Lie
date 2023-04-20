@@ -1,3 +1,4 @@
+import 'package:ball_dont_lie/Auth/login_screen.dart';
 import 'package:ball_dont_lie/service/auth_service.dart';
 import 'package:ball_dont_lie/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class AuthGate extends StatelessWidget
 Widget getHome(int authLevel) {
   switch (authLevel) {
     case 0:
-      // return const AutheScreen();
+      return const LoginScreen();
     // break;
     case 1:
       return const Wrapper();

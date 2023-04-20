@@ -26,18 +26,18 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
   void didChangeDependencies() async
   {
     super.didChangeDependencies();
-    if(_isInit)
-    {
-      await Provider.of<UserProvider>(context, listen: false)
-          .fetchAndSetusers()
-          .then((value) async =>
-          {
+    // if(_isInit)
+    // {
+    //   await Provider.of<UserProvider>(context, listen: false)
+    //       .fetchAndSetusers()
+    //       .then((value) async =>
+    //       {
             
-            await Provider.of<UserProvider>(context, listen: false)
-                      .setUser()
-          });
-    }
-    _isInit=false;
+    //         await Provider.of<UserProvider>(context, listen: false)
+    //                   .setUser()
+    //       });
+    // }
+    // _isInit=false;
   }
 
   @override
