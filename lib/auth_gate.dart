@@ -3,8 +3,7 @@ import 'package:ball_dont_lie/service/auth_service.dart';
 import 'package:ball_dont_lie/wrapper.dart';
 import 'package:flutter/material.dart';
 
-class AuthGate extends StatelessWidget 
-{
+class AuthGate extends StatelessWidget {
   AuthGate({super.key});
   final AuthService _authService = AuthService();
   @override
@@ -16,17 +15,20 @@ class AuthGate extends StatelessWidget
             return const Center(
               child: CircularProgressIndicator(),
             );
+          } else if (snapshot.connectionState == ConnectionState.none) {
+            return const Center(
+              child: Text('Unable to connect'),
+            );
           }
           return getHome(snapshot.data!);
         });
   }
 }
 
-
 Widget getHome(int authLevel) {
   switch (authLevel) {
     case 0:
-      return const LoginScreen();
+      return LoginScreen();
     // break;
     case 1:
       return const Wrapper();
