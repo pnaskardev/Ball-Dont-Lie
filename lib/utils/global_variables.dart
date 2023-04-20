@@ -2,6 +2,9 @@ import 'package:ball_dont_lie/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:neopop/widgets/cards/neopop_card.dart';
 
+// String uri = 'https://wild-rose-scorpion-robe.cyclic.app';
+String uri = 'http://192.168.0.104:3000';
+
 final List<Tab> leagueTabs = <Tab>
 [
   Tab

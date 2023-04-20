@@ -2,7 +2,6 @@
 import 'package:ball_dont_lie/auth_gate.dart';
 import 'package:ball_dont_lie/features/MatchDayFixtures/screens/matchday_fixtures_screen.dart';
 import 'package:ball_dont_lie/features/MatchDayResults/screens/match_day_result_screen.dart';
-import 'package:ball_dont_lie/firebase_options.dart';
 import 'package:ball_dont_lie/providers/fav_league_provider.dart';
 import 'package:ball_dont_lie/providers/fixture_provider.dart';
 import 'package:ball_dont_lie/providers/league_provider/bundesliga_provider.dart';
@@ -16,9 +15,7 @@ import 'package:ball_dont_lie/providers/theme_provider.dart';
 import 'package:ball_dont_lie/providers/transfer_provider.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/themes.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,14 +24,6 @@ Future<void> main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs=await SharedPreferences.getInstance();
-  await Firebase.initializeApp
-  (
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  FlutterFireUIAuth.configureProviders
-  ([
-    const EmailProviderConfiguration()
-  ]);
   return runApp
   (
     ChangeNotifierProvider
@@ -86,7 +75,7 @@ class MyApp extends StatelessWidget
             theme: value.getTheme ,
             // darkTheme: Themes.darkTheme,
             // themeMode: ThemeMode.system,
-            home:  const AuthGate(),
+            home: AuthGate(),
             routes: 
             {
               MatchDayResults.routeName:(context) => const MatchDayResults(),
