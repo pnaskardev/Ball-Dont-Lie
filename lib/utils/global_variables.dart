@@ -152,12 +152,14 @@ var leagueHeaders =
   {'Items':"premierleague",},
   {'Items':"laliga",},
   {'Items':"bundesliga",},
-  {'Items':"europaleague"},
-  {'Items':"eredivisie"},
-  {'Items':"europaconferenceleague"},
-  {'Items':"fifaclubworldcup"},
+  {'Items':"ligue 1",},
+  {'Items':"serie a",},
   {'Items':"indiansuperleague"},
-  {'Items':"majorleaguesoccer"},
+  // {'Items':"europaleague"},
+  // {'Items':"eredivisie"},
+  // {'Items':"europaconferenceleague"},
+  // {'Items':"fifaclubworldcup"},
+  // {'Items':"majorleaguesoccer"},
 ];
 
 
@@ -166,5 +168,6 @@ Map<int,String> indexLeagueHeaders =
   0:"laliga",
   1:"premierleague",
   2:"bundesliga",
-  3:"indiansuperleague",
+  3:"ligue1",
+  4:"indiansuperleague",
 };

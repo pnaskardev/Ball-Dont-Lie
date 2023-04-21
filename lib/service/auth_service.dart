@@ -42,6 +42,7 @@ class AuthService {
       }
     } catch (e) {
       showSnackBar(context, '${e.toString}', false);
+      throw Exception(e);
     }
     return 0;
   }
@@ -49,43 +50,45 @@ class AuthService {
   // sign up user
   Future signUpUser({
     required BuildContext context,
-    required String name,
     required String email,
     required String password,
   }) async {
     try {
-      User user = User
-      (
-        id: '',
-        name: name,
-        email: email,
-        password: password,
-        token: '',
-        selectedLeagues: []
-      );
+      User user = User(
+          id: '',
+          email: email,
+          password: password,
+          token: '',
+          selectedLeagues: []);
       http.Response res = await http.post(Uri.parse('$uri/auth/signup'),
           // body: user.toJson(),
-          body: user.toJson(),
+          body: jsonEncode(user.toJson()),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
             // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           });
-      httpErrorHandle(
+      httpErrorHandle
+      (
           response: res,
           context: context,
-          onSuccess: () async {
-            showSnackBar(context, 'Account created!!',true);
+          onSuccess: () async 
+          {
+            showSnackBar(context, 'Account created!!', true);
             SharedPreferences prefs = await SharedPreferences.getInstance();
             await prefs.setString(
                 'x-auth-token', jsonDecode(res.body)['token']);
             Provider.of<UserProvider>(context, listen: false).setUser(res.body);
             Navigator.pushNamedAndRemoveUntil(
                 context, Wrapper.routeName, (route) => false);
-          });
-    } catch (e) {
+          }
+      );
+    } 
+    catch (e) 
+    {
       log('$uri/auth/signup');
       log(e.toString());
-      showSnackBar(context, '${e.toString}',false);
+      showSnackBar(context, '${e.toString}', false);
+      throw Exception(e);
     }
   }
 
@@ -115,9 +118,9 @@ class AuthService {
                 context, Wrapper.routeName, (route) => false);
           });
     } catch (e) {
-      log('$uri/auth/signup');
       log(e.toString());
-      showSnackBar(context, '${e.toString}',false);
+      showSnackBar(context, '${e.toString}', false);
+      throw Exception(e);
     }
   }
 }

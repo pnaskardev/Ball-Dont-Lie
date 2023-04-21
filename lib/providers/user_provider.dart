@@ -15,7 +15,6 @@ class UserProvider with ChangeNotifier
   User _user = User
   (
     id: '',
-    name: '',
     email: '',
     password: '',
     token: '',

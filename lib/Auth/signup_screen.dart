@@ -15,11 +15,11 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
 
-  String? _validatePasswordMatch(String? value) {
+  bool? _validatePasswordMatch(String? value) {
     if (value != _passController.text.trim()) {
-      return 'Passwords do not match';
+      return false;
     }
-    return null;
+    return true;
   }
 
   @override
@@ -75,9 +75,9 @@ class SignupScreen extends StatelessWidget {
                     buttontext: 'Sign Up',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _authService.signInUser(
+                        _authService.signUpUser(
                             context: context,
-                            name: _emailController.text.trim(),
+                            email: _emailController.text.trim(),
                             password: _passController.text.trim());
                       }
                     },

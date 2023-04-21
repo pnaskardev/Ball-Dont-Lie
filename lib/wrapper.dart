@@ -25,12 +25,17 @@ class _WrapperState extends State<Wrapper> {
 
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<UserProvider>(context, listen: false)
-        .user
-        .selectedLeagues
-        .isEmpty) {
-      return const ChooseLeagues();
-    }
-    return const NavBar();
+    // if (Provider.of<UserProvider>(context, listen: true)
+    //     .user
+    //     .selectedLeagues
+    //     .isEmpty) {
+    //   return const ChooseLeagues();
+    // }
+    // return const NavBar();
+    return Consumer<UserProvider>(builder: (context, data, child) {
+      return data.user.selectedLeagues.isEmpty
+          ? const ChooseLeagues()
+          : const NavBar();
+    });
   }
 }

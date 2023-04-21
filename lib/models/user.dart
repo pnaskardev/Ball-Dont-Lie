@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 
 class User {
   final String id;
-  String name;
   final String email;
   final String password;
   final String token;
@@ -13,7 +12,6 @@ class User {
 
   User({
     required this.id,
-    required this.name,
     required this.email,
     required this.password,
     required this.token,
@@ -28,7 +26,6 @@ class User {
     return User
     (
       id: json['_id'],
-      name: json['name'],
       email: json['email'],
       password: json['password'],
       token: json['token'],
@@ -43,7 +40,6 @@ class User {
     return 
     {
       '_id': id,
-      name:'name',
       'email': email,
       'password': password,
       'token': token,
