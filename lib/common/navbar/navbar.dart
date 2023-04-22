@@ -91,7 +91,7 @@ class _NavBarState extends State<NavBar> {
           // ),
           controller: controller,
           children: const <Widget>[
-            HomePage(),
+            // HomePage(),
             Standings(),
             TransferPage(),
             SettingsPage(),
@@ -115,10 +115,10 @@ class _NavBarState extends State<NavBar> {
             selectedIndex: currentPageIndex,
             animationDuration: const Duration(seconds: 2),
             destinations: const <Widget>[
-              NavigationDestination(
-                icon: Icon(Icons.score),
-                label: 'Scores',
-              ),
+              // NavigationDestination(
+              //   icon: Icon(Icons.score),
+              //   label: 'Scores',
+              // ),
               NavigationDestination(
                 icon: Icon(Icons.table_bar_outlined),
                 label: 'Standings',
