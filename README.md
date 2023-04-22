@@ -23,9 +23,8 @@
 - [Flutter SDK](https://flutter.dev/) - Flutter Standard development kit to build cross platform apps.
 - [Dart](https://dart.dev/) - To paint all the UI into life
 - [Provider](https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple) - Provider State management package to manage the state of the mobile application.
-- [Firebase](https://firebase.google.com/) - Firebase to manage user authentication
 - [HTTP](https://pub.dev/packages/http) - http package from dart to manage asynchronous function calls and network calls.
 - 
 
  ## API used:
- ### [FootballAPI](https://rapidapi.com/GiulianoCrescimbeni/api/football98/) 
+ ### [Custom API Made by me:-](https://github.com/pnaskardev/FootballWebScraper)
