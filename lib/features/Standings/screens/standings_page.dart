@@ -1,10 +1,9 @@
-import 'package:ball_dont_lie/features/leagues/ISL/screens/isl_screen.dart';
-import 'package:ball_dont_lie/features/leagues/bundesliga/screens/bundesliga_screen.dart';
-import 'package:ball_dont_lie/features/leagues/laliga/screens/laliga_screen.dart';
-import 'package:ball_dont_lie/features/leagues/premierLeague/screens/premierleague_screen.dart';
-import 'package:ball_dont_lie/utils/global_variables.dart';
+import 'package:ball_dont_lie/common/widgets/neopop_card_common.dart';
+import 'package:ball_dont_lie/features/Standings/widgets/standings_body.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Standings extends StatefulWidget 
 {
@@ -29,7 +28,7 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
       (
         body: DefaultTabController
         (
-          length: leagueTabs.length,
+          length: Provider.of<UserProvider>(context).user.selectedLeagues.length,
           child: NestedScrollView
           (
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled)
@@ -83,7 +82,15 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
                     TabBar
                     (
                       isScrollable: true,
-                      tabs: leagueTabs,
+                      // tabs: leagueTabs,
+                      tabs: List.generate
+                      (
+                        Provider.of<UserProvider>(context).user.selectedLeagues.length,
+                        (index) => Tab
+                        (
+                          child: NeopopCardGlobal(text: Provider.of<UserProvider>(context).user.selectedLeagues[index]),
+                        )
+                      ),
                       
                     ),
                     
@@ -93,32 +100,39 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
               
               ];
             },
-            body:  const Center
+            body: Center
             (
               child: TabBarView
               (
-                children: 
-                [
-                  Tab
+                children: List.generate
+                (
+                  Provider.of<UserProvider>(context).user.selectedLeagues.length,
+                  (index) => Tab
                   (
-                    child: LaligaScreen(),
-                  ),
-                   Tab
-                  (
-                    child: PremierleagueScreen(),
-                  ),
-                   Tab
-                  (
-                    child: BundesligaScreen(),
-                  ),
-                   Tab
-                  (
-                    child: IslScreen(),
-                  ),
-                ],
+                    child: StandingsTable(league:Provider.of<UserProvider>(context).user.selectedLeagues[index] ),
+                  )
+                ),
+                // [
+                //   Tab
+                //   (
+                //     child: LaligaScreen(),
+                //   ),
+                //    Tab
+                //   (
+                //     child: PremierleagueScreen(),
+                //   ),
+                //    Tab
+                //   (
+                //     child: BundesligaScreen(),
+                //   ),
+                //    Tab
+                //   (
+                //     child: IslScreen(),
+                //   ),
+                // ],
               ),
             ),
-          
+           
           ),
         ),
       )
