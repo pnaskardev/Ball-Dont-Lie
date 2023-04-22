@@ -1,3 +1,4 @@
+import 'package:ball_dont_lie/utils/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,7 +17,7 @@ class Themes
   static final darkTheme=ThemeData
   (
     useMaterial3: true,
-    scaffoldBackgroundColor: Colors.grey.shade900,
+    scaffoldBackgroundColor: Pallete.backgroundColor,
     colorScheme: const ColorScheme.dark(),
     fontFamily: GoogleFonts.lexendDeca().fontFamily,
     textTheme: TextTheme

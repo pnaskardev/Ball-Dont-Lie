@@ -1,58 +1,62 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_this
+// ignore_for_file: unnecessary_this
 
-class Team
-{
-  String? position;
-  String? squadLogo;
-  String? name;
-  String? points;
-  String? played;
-  String? winned;
-  String? loosed;
-  String? tie;
-  String? goalDifference;
-  Team
-  (
-    {
-      required this.position,
-      required this.squadLogo,
-      required this.name,
-      required this.points,
-      required this.played,
-      required this.winned,
-      required this.loosed,
-      required this.tie,
-      required this.goalDifference
-    }
-  );
+class Team {
+  String? teamPosition;
+  String? teamLogo;
+  String? teamName;
+  String? gp;
+  String? w;
+  String? d;
+  String? l;
+  String? f;
+  String? a;
+  String? gd;
+  String? p;
+  String? sId;
 
-  Team.fromJson(Map<String, dynamic> json) 
-  {
-    position = json['Position'];
-    squadLogo = json['SquadLogo'];
-    name = json['Name'];
-    points = json['Points'];
-    played = json['Played'];
-    winned = json['Winned'];
-    loosed = json['Loosed'];
-    tie = json['Tie'];
-    goalDifference = json['Goal Difference'];
+  Team(
+      {this.teamPosition,
+      this.teamLogo,
+      this.teamName,
+      this.gp,
+      this.w,
+      this.d,
+      this.l,
+      this.f,
+      this.a,
+      this.gd,
+      this.p,
+      this.sId});
+
+  Team.fromJson(Map<String, dynamic> json) {
+    teamPosition = json['teamPosition'];
+    teamLogo = json['teamLogo'];
+    teamName = json['teamName'];
+    gp = json['gp'];
+    w = json['w'];
+    d = json['d'];
+    l = json['l'];
+    f = json['f'];
+    a = json['a'];
+    gd = json['gd'];
+    p = json['p'];
+    sId = json['_id'];
   }
 
-  Map<String, dynamic> toJson() 
-  {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['Position'] = this.position;
-    data['SquadLogo'] = this.squadLogo;
-    data['Name'] = this.name;
-    data['Points'] = this.points;
-    data['Played'] = this.played;
-    data['Winned'] = this.winned;
-    data['Loosed'] = this.loosed;
-    data['Tie'] = this.tie;
-    data['Goal Difference'] = this.goalDifference;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['teamPosition'] = this.teamPosition;
+    data['teamLogo'] = this.teamLogo;
+    data['teamName'] = this.teamName;
+    data['gp'] = this.gp;
+    data['w'] = this.w;
+    data['d'] = this.d;
+    data['l'] = this.l;
+    data['f'] = this.f;
+    data['a'] = this.a;
+    data['gd'] = this.gd;
+    data['p'] = this.p;
+    data['_id'] = this.sId;
     return data;
-  
   }
-
 }

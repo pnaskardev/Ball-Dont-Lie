@@ -19,44 +19,36 @@ class _ResultScreenState extends State<ResultScreen> with AutomaticKeepAliveClie
   @override
   bool get wantKeepAlive => true;
 
-  @override
-  void initState() 
-  {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) 
-    {
-      Provider.of<ResultsProvider>(context,listen: false).getResults(UserProvider.user!.favLeague);
-    });
-  }
 
   @override
   Widget build(BuildContext context) 
   {
     super.build(context);
-    return Scaffold
+    return const Scaffold
     (
       
-      body: Consumer<ResultsProvider>(builder: (context, value, child)
-      {
-        if(value.isLoading==true)
-        {
-          return const Center
-          (
-            child: CircularProgressIndicator(),
-          );
-        }
-        else if(value.isError==true)
-        {
-          return const Center
-          (
-            child: Icon(Icons.error),
-            // child: SizedBox(),
-          );
-        }
-        final fetchedResults=value.getResultsList;
-        log(fetchedResults.length.toString());
-        return ResultCard(fetchedResults: fetchedResults);
-      },),
+      // body: Consumer<ResultsProvider>(builder: (context, value, child)
+      // {
+      //   if(value.isLoading==true)
+      //   {
+      //     return const Center
+      //     (
+      //       child: CircularProgressIndicator(),
+      //     );
+      //   }
+      //   else if(value.isError==true)
+      //   {
+      //     return const Center
+      //     (
+      //       child: Icon(Icons.error),
+      //       // child: SizedBox(),
+      //     );
+      //   }
+      //   final fetchedResults=value.getResultsList;
+      //   log(fetchedResults.length.toString());
+      //   return ResultCard(fetchedResults: fetchedResults);
+      // },),
+      body: Center(child: Text('Result Screen')),
     );
   }
 }

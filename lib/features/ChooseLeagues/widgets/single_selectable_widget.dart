@@ -16,39 +16,26 @@ class _SingleSelectableWidgetState extends State<SingleSelectableWidget>
   @override
   Widget build(BuildContext context) 
   {
-    return Column
+    return GridView.count
     (
-      mainAxisSize: MainAxisSize.min,
-      children: 
-      [
-         const ListTile
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 3,
+      shrinkWrap: true,
+      children: List.generate(leagueHeaders.length, (index) 
+      {
+        return ActionChip
         (
-          title: Text('Select you fav league'),
-        ),
-        GridView.count
-        (
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 3,
-          shrinkWrap: true,
-          children: List.generate(leagueHeaders.length, (index) 
+          label: Text(leagueHeaders[index]['Items']!),
+          backgroundColor: selectedIndex==index ? Colors.purple: Colors.blueGrey,
+          onPressed: ()
           {
-            return ActionChip
-            (
-              label: Text(leagueHeaders[index]['Items']!),
-              backgroundColor: selectedIndex==index ? Colors.purple: Colors.blueGrey,
-              onPressed: ()
-              {
-                setState(() 
-                {
-                  selectedIndex=index;
-                });
-                Provider.of<FavProvider>(context,listen: false
-                ).setFav(leagueHeaders[index]['Items']!);
-              },
-            );
-          }),
-        ),
-      ],
+            setState(() 
+            {
+              selectedIndex=index;
+            });
+          },
+        );
+      }),
     );
   }
 }

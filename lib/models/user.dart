@@ -1,19 +1,41 @@
-import 'package:json_annotation/json_annotation.dart';
+// ignore_for_file: unnecessary_this
 
-part 'user.g.dart';
-@JsonSerializable()
-class User
-{
-  late String uid;
-  late String name;  
-  late String favLeague;
-  late List<String> selectedLeags;
+import 'dart:convert';
 
-  User({required this.uid,required this.name,required this.selectedLeags,required this.favLeague});  
+class User {
+  final String id;
+  final String email;
+  final String password;
+  String? token;
+  final List<String> selectedLeagues;
 
+  User({
+    required this.id,
+    required this.email,
+    required this.password,
+    this.token,
+    required this.selectedLeagues,
+  });
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+        id: json['_id'] ?? '',
+        email: json['email'] ?? '',
+        password: json['password'] ?? '',
+        selectedLeagues: json['selectedLeagues'].cast<String>() ?? []);
+  }
 
-  factory User.fromJson(Map<String,dynamic>map)=>_$UserFromJson(map);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = this.id;
+    data['email'] = this.email;
+    data['password'] = this.password;
+    data['token'] = this.token;
+    data['selectedLeagues'] = this.selectedLeagues;
+    return data;
+  }
 
-  Map<String,dynamic> toJson()=> _$UserToJson(this);
-
+  factory User.fromString(String jsonString) {
+    final Map<String, dynamic> map = json.decode(jsonString);
+    return User.fromJson(map);
+  }
 }

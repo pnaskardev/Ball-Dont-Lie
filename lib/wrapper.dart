@@ -1,87 +1,41 @@
-import 'dart:developer';
-
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/screens/choose_leagues.dart';
 import 'package:ball_dont_lie/providers/user_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Wrapper extends StatefulWidget 
-{
+class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
-
+  static const routeName = '/wrapper';
   @override
   State<Wrapper> createState() => _WrapperState();
 }
 
-class _WrapperState extends State<Wrapper> 
-{
+class _WrapperState extends State<Wrapper> {
   bool isData = false;
   bool isLoading = true;
 
-
-  void initiate() async 
-  {
-    UserProvider.setUid();
-    
-    var uid = UserProvider.clientId;
-    await FirebaseFirestore.instance.collection('users').doc(uid).get().then
-    (
-      (DocumentSnapshot<Map<String, dynamic>> documentSnapshot) 
-      {
-        if (documentSnapshot.exists) 
-        {
-          setState(() 
-          {
-            isData = true;
-          });
-        }
-        setState(() {
-          isLoading = false;
-        });
-      },
-    );
-  }
+  void initiate() async {}
 
   @override
-  void initState() 
-  {
+  void initState() {
     super.initState();
     initiate();
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    if (isLoading) 
-    {
-      return const Center
-      (
-        child: CircularProgressIndicator(),
-      );
-    } 
-    else if (isData) 
-    {
-      return FutureBuilder
-      (
-        future: Provider.of<UserProvider>(context,listen: false).setUser(),
-        builder: (context, snapshot) 
-        {
-          if(snapshot.connectionState==ConnectionState.waiting)
-          {
-            return const Center
-            (
-              child: CircularProgressIndicator(),
-            );
-          }
-          return const NavBar();
-        }
-      );
-    } 
-    else 
-    {
-      return const ChooseLeagues();
-    }
+  Widget build(BuildContext context) {
+    // if (Provider.of<UserProvider>(context, listen: true)
+    //     .user
+    //     .selectedLeagues
+    //     .isEmpty) {
+    //   return const ChooseLeagues();
+    // }
+    // return const NavBar();
+    return Consumer<UserProvider>(builder: (context, data, child) {
+      return data.user.selectedLeagues.isEmpty
+          ? const ChooseLeagues()
+          : const NavBar();
+    });
   }
 }
