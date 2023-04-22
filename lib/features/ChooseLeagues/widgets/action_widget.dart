@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ActionWidget extends StatefulWidget {
   ActionWidget(
       {super.key,
@@ -7,6 +8,7 @@ class ActionWidget extends StatefulWidget {
       required this.index,
       required this.selectedItems});
   int index;
+  // ignore: prefer_typing_uninitialized_variables
   final leagueHeaders;
   List<String> selectedItems;
   @override

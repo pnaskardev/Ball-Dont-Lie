@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ball_dont_lie/common/navbar/navbar.dart';
 import 'package:ball_dont_lie/features/ChooseLeagues/widgets/action_widget.dart';
+import 'package:ball_dont_lie/providers/user_provider.dart';
 import 'package:ball_dont_lie/utils/global_variables.dart';
+import 'package:ball_dont_lie/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChooseLeagues extends StatefulWidget {
   const ChooseLeagues({super.key});
@@ -13,7 +17,7 @@ class ChooseLeagues extends StatefulWidget {
 }
 
 class _ChooseLeaguesState extends State<ChooseLeagues> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
+  var _isLoading = false;
   List<String> selectedItems = [];
   @override
   Widget build(BuildContext context) {
@@ -35,24 +39,9 @@ class _ChooseLeaguesState extends State<ChooseLeagues> {
                 const SizedBox(
                   height: 20,
                 ),
-                // const ListTile
-                // (
-                //   title: Text('Select you fav league'),
-                // ),
-                // const SingleSelectableWidget(),
                 const ListTile(
                   title: Text('Select the leagues you wanna see standings for'),
                 ),
-                // GridView.count
-                // (
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   crossAxisCount: 2,
-                //   shrinkWrap: true,
-                //   children: List.generate(leagueHeaders.length, (index)
-                //   {
-                //     return ActionWidget(league: leagueHeaders[index]['Items']!);
-                //   }),
-                // )
                 SizedBox(
                   height: size.height * 0.6,
                   child: ListView.builder(
@@ -75,23 +64,34 @@ class _ChooseLeaguesState extends State<ChooseLeagues> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          print(selectedItems);
-          // try
-          // {
-          //   // await Provider.of<UserProvider>(context,listen: false).adduser(user);
-          //   Navigator.pushReplacement
-          //   (
-          //     context,
-          //     MaterialPageRoute(builder: (context)=>const NavBar())
-          //   );
-          // }
-          // catch (e)
-          // {
-          //   log(e.toString());
-          //   throw Exception(e);
-          // }
+          if (selectedItems.isEmpty) {
+            showSnackBar(context, 'Please Select atleast one league', false);
+          }
+          try {
+            setState(() {
+              _isLoading = true;
+            });
+            await Provider.of<UserProvider>(context, listen: false)
+                .addLeague(context,selectedItems);
+            setState(() {
+              _isLoading = false;
+            });
+          } catch (e) {
+            setState(() {
+              _isLoading = false;
+            });
+            log(e.toString());
+          } finally {
+            setState(() {
+              _isLoading = false;
+            });
+          }
         },
-        label: const Text('Continue'),
+        label: _isLoading == true
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : const Text('Continue'),
       ),
     ));
   }
