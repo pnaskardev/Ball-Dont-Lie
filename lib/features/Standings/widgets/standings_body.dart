@@ -54,6 +54,7 @@ class _StandingsTableState extends State<StandingsTable>
                   final fetchedTeams=snapshot.data;
                   return ListView.builder
                   (
+                    controller: ScrollController(),
                     itemCount: fetchedTeams!.length,
                     itemBuilder:(context,index)
                     {

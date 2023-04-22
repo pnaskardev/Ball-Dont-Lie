@@ -68,25 +68,26 @@ class UserProvider with ChangeNotifier {
       String token = prefs.getString('x-auth-token') ?? '';
       prefs.setString('x-auth-token', token);
 
-
-      http.Response res  = await http.patch(
+      http.Response res = await http.patch(
           Uri.parse('$uri/profile/edit-selectedLeagues?userId=${_user.id}'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'x-auth-token': token
           },
-          body: jsonEncode(league)
-        );
+          body: jsonEncode(league));
+      log(res.statusCode.toString());
       httpErrorHandle(
           response: res,
           context: context,
           onSuccess: () async {
             setUser(res.body);
-            
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Leagues has been updated'),backgroundColor: Colors.green,));
-                Navigator.of(context)
-                .pushNamedAndRemoveUntil(NavBar.routeName, (Route<dynamic> route) => false);
+
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Leagues has been updated'),
+              backgroundColor: Colors.green,
+            ));
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                NavBar.routeName, (Route<dynamic> route) => false);
           });
     } catch (e) {
       throw Exception(e);

@@ -66,13 +66,14 @@ class _ChooseLeaguesState extends State<ChooseLeagues> {
         onPressed: () async {
           if (selectedItems.isEmpty) {
             showSnackBar(context, 'Please Select atleast one league', false);
+            // return;
           }
           try {
             setState(() {
               _isLoading = true;
             });
             await Provider.of<UserProvider>(context, listen: false)
-                .addLeague(context,selectedItems);
+                .addLeague(context, selectedItems);
             setState(() {
               _isLoading = false;
             });
